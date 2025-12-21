@@ -1,0 +1,4 @@
+// Basic s0fractal theme
+theme "gruvbox-dark"
+default_layout "compact"
+mouse_mode true
