@@ -1,35 +1,30 @@
 #!/bin/bash
 
-echo "🔮 Initializing s0fractal Environment..."
+echo "🔮 Tuning s0fractal Environment..."
 
-# --- 1. АЛІАСИ (Заклинання) ---
-
-# 'git universe' - Візуалізація топології
-# Показує дерево комітів як схему метро з хешами та авторами
+# --- Git Aliases ---
 git config --global alias.universe "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all"
-
-# 'git sync' - Сінхронізація Реальності
-# Тягне зміни і одразу оновлює сабмодулі (щоб не робити це в два кроки)
 git config --global alias.sync "!git pull && git submodule update --init --recursive"
 
-# 'git nuke' - Екстрена чистка (обережно!)
-# Видаляє всі невідстежувані файли і скидає зміни (корисно для тестів)
-git config --global alias.nuke "!git clean -fd && git reset --hard"
+# --- Zsh/Bash Alias for λ ---
+# Визначаємо шлях до кореня репо
+REPO_ROOT=$(pwd)
 
-echo "✅ Aliases installed: git universe, git sync, git nuke"
+# Додаємо аліас у файл конфігурації шелла (обережно, щоб не дублювати)
+SHELL_RC="$HOME/.zshrc"
+if [ -n "$BASH_VERSION" ]; then SHELL_RC="$HOME/.bashrc"; fi
 
-# --- 2. ХУКИ (Нервова Система) ---
-
-# post-checkout: Автоматично оновлює сабмодулі при перемиканні гілок
-HOOK_DIR="../.git/hooks"
-if [ -d "$HOOK_DIR" ]; then
-    echo "#!/bin/sh" > "$HOOK_DIR/post-checkout"
-    echo "echo '🔄 Auto-aligning submodules...'" >> "$HOOK_DIR/post-checkout"
-    echo "git submodule update --init --recursive" >> "$HOOK_DIR/post-checkout"
-    chmod +x "$HOOK_DIR/post-checkout"
-    echo "✅ Hook installed: post-checkout (Auto-submodule update)"
+if ! grep -q "alias λ=" "$SHELL_RC"; then
+    echo "" >> "$SHELL_RC"
+    echo "# s0fractal Lambda Protocol" >> "$SHELL_RC"
+    # Аліас 'λ' викликає скрипт lambda.sh з поточного репо
+    # УВАГА: Це працюватиме тільки коли ти всередині репо.
+    # Щоб зробити глобально, треба абсолютний шлях, але поки зробимо локально:
+    echo "alias λ='$REPO_ROOT/sh/lambda.sh'" >> "$SHELL_RC"
+    echo "✅ Alias 'λ' added to $SHELL_RC"
+    echo "👉 Please run: source $SHELL_RC"
 else
-    echo "⚠️  Warning: Hooks directory not found (Are you in the root of a repo?)"
+    echo "ℹ️  Alias 'λ' already exists."
 fi
 
-echo "🚀 s0fractal environment ready. Welcome to the Void."
+echo "🚀 Ready. Try: λ ?"
