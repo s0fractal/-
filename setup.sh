@@ -3,7 +3,8 @@
 # s0fractal Environment Bootstrapper
 # Version: Sovereign v1.0
 
-REPO_ROOT=$(pwd)
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+REPO_ROOT="$(dirname "$SCRIPT_DIR")"
 echo "🔮 Initializing s0fractal Universe..."
 
 # ==========================================
