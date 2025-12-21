@@ -82,8 +82,8 @@ fi
 if [ -f "$CRYSTAL_BREWFILE" ]; then
     echo "💎 Found Crystal definition: software.rb"
     echo "📦 Installing/Updating dependencies..."
-    # --no-lock щоб не створювати зайвий Brewfile.lock.json у гліфах, якщо не хочеш
-    $BREW_BIN bundle install --file="$CRYSTAL_BREWFILE" --no-lock
+    # щоб не створювати зайвий Brewfile.lock.json у гліфах, якщо не хочеш
+    $BREW_BIN bundle install --file="$CRYSTAL_BREWFILE"
     echo "✅ Software synced."
 else
     echo "ℹ️  No software crystal found in glyphs/."
