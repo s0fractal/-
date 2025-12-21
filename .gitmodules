@@ -2,3 +2,7 @@
 	path = sh
 	url = ./
 	branch = sh
+[submodule "glyphs"]
+	path = glyphs
+	url = ./
+	branch = glyphs
