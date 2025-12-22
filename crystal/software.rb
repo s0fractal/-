@@ -17,3 +17,4 @@ brew "ripgrep" # Fast search (краще за grep)
 # Casks (GUI Apps) - якщо треба
 # cask "visual-studio-code"
 brew "gh"
+brew "tree"
