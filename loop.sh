@@ -34,7 +34,10 @@ for ITEM in "${ITERABLE[@]}"; do
     # Обчислюємо шлях
     if [ "$TARGET_SET" == "dims" ]; then
         WORK_DIR="$REPO_ROOT/$ITEM"
-        COLOR=$(get_color "$ITEM")
+        # Extract HEX color from vector
+        VECTOR=$(get_vector "$ITEM")
+        IFS='|' read -r VID VSTO VPATH VSYN VCOL <<< "$VECTOR"
+        COLOR="$VCOL"
     else
         # ...
         WORK_DIR="$REPO_ROOT" 
