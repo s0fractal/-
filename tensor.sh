@@ -65,3 +65,8 @@ project_dim() {
         echo "${PARTS[$IDX]}"
     done
 }
+
+# --- ENVIRONMENT EXPORT ---
+# Expose ALL_DIMS and ALL_LAYERS for loop.sh and other tools
+export ALL_DIMS=($(project_dim 0))
+export ALL_LAYERS=(0 1 2 3 4 5 6 7 8)
