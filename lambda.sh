@@ -42,6 +42,10 @@ case "$GLYPH" in
     "🧬"|"unfold") # Genetic Projection / Mass Genesis
         ./sh/unfold.sh "$@"
         ;;
+    "Y"|"process") # Recursion / Daemon
+        source ./sh/7/Y.sh
+        Y "$@"
+        ;;
     *)
         echo "Unknown glyph: $GLYPH"
         # Передаємо команду в системний git (fallback)

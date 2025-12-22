@@ -36,7 +36,7 @@ for ITEM in "${ITERABLE[@]}"; do
         WORK_DIR="$REPO_ROOT/$ITEM"
         # Extract HEX color from vector
         VECTOR=$(get_vector "$ITEM")
-        IFS='|' read -r VID VSTO VPATH VSYN VCOL <<< "$VECTOR"
+        IFS='|' read -r VID VTYPE VPATH VCOL VSYN VMUTE VLIFT <<< "$VECTOR"
         COLOR="$VCOL"
     else
         # ...

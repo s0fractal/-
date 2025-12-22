@@ -67,7 +67,7 @@ while IFS= read -r line; do
             continue
         fi
         
-        IFS='|' read -r ID STORAGE PATH_VAL SYNTAX COLOR <<< "$VECTOR"
+        IFS='|' read -r ID STORAGE PATH_VAL SYNTAX COLOR VMUTE VLIFT <<< "$VECTOR"
         
         # Collapse Wave Function -> Material Path
         # Formula: $REPO_ROOT / $DIM_PATH / $ENERGY / $GLYPH . $EXTENSION
@@ -85,9 +85,21 @@ while IFS= read -r line; do
         # Ensure existence
         mkdir -p "$(dirname "$TARGET_FILE")"
         
-        # Write Headers
-        echo "// 🛑 QUANTUM STATE: COLLAPSED FROM $(basename "$SOURCE")" > "$TARGET_FILE"
-        echo "// 🌊 FREQUENCY: $ID | ENERGY: $ENERGY" >> "$TARGET_FILE"
+        # Write Headers (Syntax DNA)
+        # 1. LIFT (Shebang/Preamble)
+        if [ -n "$VLIFT" ]; then
+            echo "$VLIFT" > "$TARGET_FILE"
+        fi
+
+        # 2. META (Comments)
+        PREFIX="$VMUTE"
+        if [ -z "$PREFIX" ]; then PREFIX="// "; fi # Fallback if MUTE is missing
+        
+        HEADER_ACTION=">>"
+        if [ -z "$VLIFT" ]; then HEADER_ACTION=">"; fi # Start fresh if no LIFT
+        
+        eval "echo \"${PREFIX}🛑 QUANTUM STATE: COLLAPSED FROM $(basename "$SOURCE")\" $HEADER_ACTION \"$TARGET_FILE\""
+        echo "${PREFIX}🌊 FREQUENCY: $ID | ENERGY: $ENERGY" >> "$TARGET_FILE"
         
         IN_BLOCK=1
         continue

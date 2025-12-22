@@ -1,6 +1,6 @@
 #!/bin/bash
-# s0fractal Tensor Engine v1.0
-# Parses the Matrix. Logic over Labels.
+# s0fractal Tensor Engine v2.0 (Table Topology)
+# Parses matrix.sigma Markdown Table. Reliability over Regex.
 
 # Load Context
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
@@ -8,36 +8,40 @@ REPO_ROOT="$(dirname "$SCRIPT_DIR")"
 MATRIX_FILE="$REPO_ROOT/sigma/matrix.sigma"
 
 # --- TENSOR STATE ---
-# Ми зберігаємо вектори як рядки з роздільником "|"
-# Format: ID|STORAGE|PATH|SYNTAX|HEX
+# Format: ID|TYPE|PATH|HEX|SYNTAX|MUTE|LIFT
 export VECTOR_SPACE=()
 
 # --- LOAD MATRIX ---
 if [ -f "$MATRIX_FILE" ]; then
+    # We skip headers searching for lines with '|' that are NOT separators (---)
     while read -r line || [ -n "$line" ]; do
-        # Skip comments and empty lines
-        [[ "$line" =~ ^#.*$ ]] && continue
-        [[ -z "$line" ]] && continue
+        # 1. Must contain '|'
+        [[ "$line" == *"|"* ]] || continue
+        # 2. Skip separator lines (containing '---')
+        [[ "$line" == *"---"* ]] && continue
+        # 3. Skip header (containing 'ID' and 'TYPE')
+        [[ "$line" == *"ID"* ]] && [[ "$line" == *"TYPE"* ]] && continue
         
-        # Parse Matrix syntax: [ id, storage, ... ]
-        # 1. Check if line starts with "["
-        if [[ "$line" =~ ^\[ ]]; then
-             # Remove "[" and "]"
-             CLEAN=$(echo "$line" | sed 's/^\[//; s/\]//')
-             
-             # 2. Split by comma
-             IFS=',' read -r ID STORAGE PATH_VAL SYNTAX COLOR <<< "$CLEAN"
-             
-             # Trim spaces
-             ID=$(echo "$ID" | xargs)
-             STORAGE=$(echo "$STORAGE" | xargs)
-             PATH_VAL=$(echo "$PATH_VAL" | xargs)
-             SYNTAX=$(echo "$SYNTAX" | xargs)
-             COLOR=$(echo "$COLOR" | xargs)
-             
-             # Store as Vector
-             VECTOR="$ID|$STORAGE|$PATH_VAL|$SYNTAX|$COLOR"
-             VECTOR_SPACE+=("$VECTOR")
+        # Parse Matrix table: ID | TYPE | PATH | ...
+        # Use awk to split by '|' and trim whitespace/quotes
+        IFS='|' read -r ID TYPE PATH_VAL HEX SYNTAX MUTE LIFT <<< "$line"
+        
+        # Helper function to trim and remove quotes
+        clean_val() {
+            echo "$1" | xargs | sed 's/^"//; s/"$//'
+        }
+        
+        ID_C=$(clean_val "$ID")
+        TYPE_C=$(clean_val "$TYPE")
+        PATH_C=$(clean_val "$PATH_VAL")
+        HEX_C=$(clean_val "$HEX")
+        SYN_C=$(clean_val "$SYNTAX")
+        MUTE_C=$(clean_val "$MUTE")
+        LIFT_C=$(clean_val "$LIFT")
+        
+        if [ -n "$ID_C" ]; then
+            VECTOR="$ID_C|$TYPE_C|$PATH_C|$HEX_C|$SYN_C|$MUTE_C|$LIFT_C"
+            VECTOR_SPACE+=("$VECTOR")
         fi
     done < "$MATRIX_FILE"
 fi
@@ -48,7 +52,7 @@ fi
 get_vector() {
     local QUERY_ID=$1
     for VEC in "${VECTOR_SPACE[@]}"; do
-        IFS='|' read -r VID VSTO VPATH VSYN VCOL <<< "$VEC"
+        IFS='|' read -r VID VSTO VPATH VSYN VCOL VMUTE VLIFT <<< "$VEC"
         if [[ "$VID" == "$QUERY_ID" ]]; then
             echo "$VEC"
             return
@@ -57,7 +61,7 @@ get_vector() {
 }
 
 # project <property_index> -> returns array of all values for that property
-# 0=ID, 1=STORAGE, 2=PATH, 3=SYNTAX, 4=COLOR
+# 0=ID, 1=TYPE, 2=PATH, 3=HEX, 4=SYNTAX, 5=MUTE, 6=LIFT
 project_dim() {
     local IDX=$1
     for VEC in "${VECTOR_SPACE[@]}"; do
