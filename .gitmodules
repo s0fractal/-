@@ -6,3 +6,7 @@
 	path = glyphs
 	url = ./
 	branch = glyphs
+[submodule "intents"]
+	path = intents
+	url = ./
+	branch = intents
