@@ -13,3 +13,6 @@
 [submodule "nodes/1-ts"]
 	path = nodes/1-ts
 	url = git@github.com:s0fractal/1-ts.git
+[submodule "nodes/2-ts"]
+	path = nodes/2-ts
+	url = git@github.com:s0fractal/2-ts.git
