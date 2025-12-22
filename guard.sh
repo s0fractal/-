@@ -53,6 +53,18 @@ for zone in lexicon crystal intents; do
     fi
 done
 
+# RULE 4: NO README IN CODE DIMENSIONS
+# README.md дозволені тільки в корені та в sigma/. Решта - шум.
+SHADOW_READMES=$(find "$REPO_ROOT/ts" "$REPO_ROOT/rs" "$REPO_ROOT/lean" -name "README.md" 2>/dev/null)
+if [ -n "$SHADOW_READMES" ]; then
+    log_err "Shadow READMEs found in code dimensions (Noise detected)"
+    echo "$SHADOW_READMES"
+    if [ $FIX_MODE -eq 1 ]; then
+        echo "$SHADOW_READMES" | xargs rm
+        log_fix "Purged shadow READMEs."
+    fi
+fi
+
 if [ $ERRORS -eq 0 ]; then
     echo "✅ Structure is Sacred."
 else

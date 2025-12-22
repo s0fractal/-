@@ -20,7 +20,7 @@ if [[ "$TARGET" =~ ^[0-9]+-[a-z]+$ ]]; then
     if [ -d "$NODE_DIR" ]; then echo "⚠️  Directory $NODE_DIR already exists!"; exit 1; fi
     
     mkdir -p "$NODE_DIR"
-    echo "# Node: $TARGET" > "$NODE_DIR/README.md"
+
     
     # 2. Локальна ініціалізація
     cd "$NODE_DIR"
@@ -83,8 +83,8 @@ else
                      echo "🌱 Genesis: Creating orphan branch '$ID'..."
                      git checkout --orphan "$ID"
                      git rm -rf .
-                     echo "# Dimension: $ID" > README.md
-                     git add README.md
+                     touch .keep
+                     git add .keep
                      git commit -m "⊕ Genesis: $ID dimension"
                      git push -u origin "$ID"
                      git checkout "$CURRENT_BRANCH"
