@@ -1,0 +1,71 @@
+---
+GLYPH: Y
+ENERGY: 7
+SPECTRUM: [ts, sh, rs, dna]
+---
+
+# The Sage Bird (Recursion)
+
+> "The Fixed Point Combinator. Converts a Step into a Process. Folds Time into Space."
+
+Y — це оператор, який знаходить "нерухому точку" функції.
+Якщо $f$ — це "один крок еволюції", то $Y(f)$ — це "вічна еволюція".
+
+$$Y = \lambda f.(\lambda x.f(x x))(\lambda x.f(x x))$$
+
+## Wave Function
+
+@[ts]
+```typescript
+// The Z-Combinator (Strict Y) allows recursion without named functions.
+type Func<A, B> = (x: A) => B;
+type RecursiveFunc<A, B> = (f: Func<A, B>) => Func<A, B>;
+
+export const Y = <A, B>(f: RecursiveFunc<A, B>): Func<A, B> => {
+  const g = (h: any) => (x: A) => f(h(h))(x);
+  return g(g);
+};
+
+// Example Usage (Factorial):
+// const fact = Y(f => n => n <= 1 ? 1 : n * f(n - 1));
+```
+
+@[sh]
+```bash
+# Y-Pattern for Bash: The "Fixed Point" Wrapper
+# Usage: Y <function_name> <args>
+
+Y() {
+    local FUNC=$1
+    shift
+    local ARGS="$@"
+    
+    # The Fixed Point: Infinite Loop protected by Exit Code
+    while true; do
+        $FUNC $ARGS
+        
+        # Break the recursion if the function returns non-zero
+        if [ $? -ne 0 ]; then break; fi
+        
+        # Breathe (anti-spin lock)
+        sleep 1
+    done
+}
+```
+
+@[rs]
+```rust
+// Fixed-point combinator in Rust (Symbolic)
+pub fn Y<A, B, F>(f: F) -> impl Fn(A) -> B
+where
+    F: Fn(&dyn Fn(A) -> B) -> (dyn Fn(A) -> B),
+{
+    // Implementation requires complex lifetimes/boxing
+    todo!()
+}
+```
+
+@[dna]
+```dna
+Y7
+```

@@ -1,20 +1,12 @@
 Σ-MATRIX: THE BASIS VECTORS
 
-Definition: [ ID, STORAGE, PATH, SYNTAX, COLOR ]
-
-[ sigma, submodule, sigma/, yaml,   #CC00FF ]
-
-[ ts,    submodule, ts/,    ts,     #3388FF ]
-
-[ rs,    submodule, rs/,    rust,   #FF4433 ]
-
-[ sh,    folder,    sh/,    bash,   #44FF88 ]
-
-[ rb,    folder,    rb/,    ruby,   #FFD700 ]
-
-[ md,    virtual,   md/,    md,     #AAAAAA ]
-
-[ json,  virtual,   json/,  json,   #F7DF1E ]
-
-[ dna,   virtual,   dna/,   glyphs, #00FF00 ]
-
+ID      | TYPE      | PATH   | HEX     | SYNTAX | MUTE   | LIFT
+--------|-----------|--------|---------|--------|--------|---------------------
+sigma   | submodule | sigma/ | #CC00FF | yaml   | "# "   | ""
+ts      | submodule | ts/    | #3388FF | ts     | "// "  | ""
+rs      | submodule | rs/    | #FF4433 | rust   | "/// " | "#![no_std]"
+sh      | folder    | sh/    | #44FF88 | bash   | "# "   | "#!/bin/bash"
+rb      | folder    | rb/    | #FFD700 | ruby   | "# "   | "#!/usr/bin/ruby"
+md      | virtual   | md/    | #AAAAAA | md     | "<!-- "| ""
+json    | virtual   | json/  | #F7DF1E | json   | ""     | ""
+dna     | virtual   | dna/   | #00FF00 | glyphs | "// "  | ""
