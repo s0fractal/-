@@ -1,0 +1,6 @@
+GLYPH: K
+NAME: Kestrel (Const)
+SIG: A -> B -> A
+DESC: "Takes two arguments, returns the first. Discards the second. The basis of Truth and Selection."
+TARGET: nodes/1-ts/ts/K.ts
+LOGIC: "x => () => x"

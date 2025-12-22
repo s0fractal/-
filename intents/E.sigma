@@ -1,0 +1,6 @@
+GLYPH: E
+NAME: Effect (Action)
+SIG: (A -> Void) -> A -> Void
+DESC: "Executes a side effect. The bridge to the physical world."
+TARGET: nodes/1-ts/ts/E.ts
+LOGIC: "eff => x => { eff(x); return x; }"
