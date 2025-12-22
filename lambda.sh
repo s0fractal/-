@@ -1,26 +1,41 @@
 #!/bin/bash
+
+# λ-Protocol Interpreter v1.1
+# Usage: λ <glyph> [args]
+
 GLYPH=$1
+
 # Якщо пустий ввід - показуємо карту
 if [ -z "$GLYPH" ]; then GLYPH="map"; else shift; fi
 
 case "$GLYPH" in
-    "⊕") # Create
-        ./sh/expand.sh "$@" ;;
-    "⋈") # Sync
+    "⊕") # Create / Expand
+        ./sh/expand.sh "$@"
+        ;;
+    "⋈") # Sync / Join
         echo "🔄 Aligning timelines..."
-        git pull && git submodule update --init --recursive ;;
-    "?"|"map") # Map
-        git universe ;;
-    "Δ") # Save
+        git pull && git submodule update --init --recursive
+        ;;
+    "?"|"map") # Query / Status
+        git universe
+        ;;
+    "Δ") # Change / Commit
         MSG="$@"
         if [ -z "$MSG" ]; then MSG="Δ mutation"; fi
         git add .
         git commit -m "Δ $MSG"
-        git push ;;
+        git push
+        ;;
     "⚕️"|"doctor") # Health
-        ./sh/doctor.sh ;;
-    "#") # Exec
-        eval "$@" ;;
-    *) # Passthrough
-        git $GLYPH "$@" ;;
+        ./sh/doctor.sh
+        ;;
+    "#") # Executable Comment
+        echo "🔮 Executing shadow code..."
+        eval "$@"
+        ;;
+    *)
+        echo "Unknown glyph: $GLYPH"
+        # Передаємо команду в системний git (fallback)
+        git $GLYPH "$@"
+        ;;
 esac
