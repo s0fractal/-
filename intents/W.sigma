@@ -1,0 +1,6 @@
+GLYPH: W
+NAME: Warbler (Fork)
+SIG: (A -> A -> B) -> A -> B
+DESC: "Duplication. Feeds the same input to binary function twice. Memory basis."
+TARGET: nodes/2-ts/ts/W.ts
+LOGIC: "f => x => f(x)(x)"

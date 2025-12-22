@@ -1,0 +1,6 @@
+GLYPH: C
+NAME: Cardinal (Flip)
+SIG: (A -> B -> C) -> B -> A -> C
+DESC: "Exchange. Swaps the order of arguments. Changes perspective."
+TARGET: nodes/2-ts/ts/C.ts
+LOGIC: "f => x => y => f(y)(x)"
