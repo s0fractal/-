@@ -3,7 +3,13 @@
 # Version: Demiurge v4 (GH CLI Integration)
 
 TARGET=$1
-if [ -z "$TARGET" ]; then echo "Usage: $0 <name>"; exit 1; fi
+if [ -z "$TARGET" ]; then echo "Usage: $0 <name> (or .sigma file)"; exit 1; fi
+
+# --- Logic: GENESIS (Materialization) ---
+if [ -f "$TARGET" ]; then
+    ./sh/genesis.sh "$TARGET"
+    exit $?
+fi
 
 # --- Logic: NODE (External Repo) ---
 if [[ "$TARGET" =~ ^[0-9]+-[a-z]+$ ]]; then
