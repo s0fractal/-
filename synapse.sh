@@ -7,30 +7,31 @@ REPO_ROOT=$(git rev-parse --show-toplevel)
 echo "--- SYSTEM CONTEXT START ---"
 echo "You are the AI Architect of s0fractal."
 echo "Current Location: $REPO_ROOT"
-echo ""
 
-echo "### 1. TOPOLOGY (Structure)"
-# Якщо є tree, показуємо дерево, якщо ні - ls
+# 1. TOPOLOGY (Map)
 if command -v tree &> /dev/null; then
-    tree -L 3 -I '.git|node_modules' "$REPO_ROOT"
+    tree -L 2 -d -I '.git|node_modules' "$REPO_ROOT"
 else
-    find "$REPO_ROOT" -maxdepth 3 -not -path '*/.*'
+    find "$REPO_ROOT" -maxdepth 2 -not -path '*/.*' -type d
 fi
 echo ""
 
-echo "### 2. LEXICON (Protocol)"
-if [ -f "$REPO_ROOT/glyphs/lexicon/operators.md" ]; then
-    cat "$REPO_ROOT/glyphs/lexicon/operators.md"
+# 2. LEXICON (Protocol)
+if [ -f "$REPO_ROOT/md/lexicon/operators.md" ]; then
+    echo "### LEXICON (Operators)"
+    cat "$REPO_ROOT/md/lexicon/operators.md"
 fi
 echo ""
 
-echo "### 3. SPECTRUM (Colors)"
-if [ -f "$REPO_ROOT/glyphs/lexicon/spectrum.md" ]; then
-    cat "$REPO_ROOT/glyphs/lexicon/spectrum.md"
+# 3. INTENT (Sigma)
+if [ -d "$REPO_ROOT/sigma" ]; then
+    echo "### SIGMA (DNA)"
+    # Show active intents
+    find "$REPO_ROOT/sigma" -name "*.sigma" -print -exec head -n 1 {} \;
 fi
 echo ""
 
-echo "### 4. HEALTH (Doctor)"
+# 4. HEALTH (Doctor)
 "$REPO_ROOT/sh/doctor.sh" | grep -v "Scanning"
 echo ""
 

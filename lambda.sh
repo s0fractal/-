@@ -33,6 +33,9 @@ case "$GLYPH" in
         echo "🔮 Executing shadow code..."
         eval "$@"
         ;;
+    "🧠"|"brain") # Local AI
+        ./sh/brain.sh "$@"
+    	;;
     *)
         echo "Unknown glyph: $GLYPH"
         # Передаємо команду в системний git (fallback)

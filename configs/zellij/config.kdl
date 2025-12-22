@@ -1,8 +1,5 @@
-// s0fractal config
 theme "gruvbox-dark"
 default_layout "s0"
 mouse_mode true
 copy_on_select true 
-
-// MacOS Clipboard Fix
 copy_command "pbcopy"
