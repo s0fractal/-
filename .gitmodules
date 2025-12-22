@@ -10,3 +10,6 @@
 	path = intents
 	url = ./
 	branch = intents
+[submodule "nodes/1-ts"]
+	path = nodes/1-ts
+	url = git@github.com:s0fractal/1-ts.git
