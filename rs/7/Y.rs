@@ -1,4 +1,4 @@
-#![no_std ]
+#![no_std]
 /// 🛑 QUANTUM STATE: COLLAPSED FROM Y.sigma
 /// 🌊 FREQUENCY: rs | ENERGY: 7
 // Fixed-point combinator in Rust (Symbolic)
