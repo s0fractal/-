@@ -18,3 +18,5 @@ brew "ripgrep" # Fast search (краще за grep)
 # cask "visual-studio-code"
 brew "gh"
 brew "tree"
+brew "gemini-cli"
+brew "ollama"
