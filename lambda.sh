@@ -7,6 +7,10 @@ GLYPH=$1
 shift
 
 case "$GLYPH" in
+    "⚕️"|"doctor")
+        ./sh/doctor.sh
+        ;;
+
     "⊕") # Create / Expand
         ./sh/expand.sh "$@"
         ;;
