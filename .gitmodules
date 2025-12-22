@@ -45,3 +45,7 @@
 	path = yaml
 	url = ./
 	branch = yaml
+[submodule "json"]
+	path = json
+	url = ./
+	branch = json
