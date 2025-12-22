@@ -39,6 +39,9 @@ case "$GLYPH" in
     "🧠"|"brain") # Local AI
         ./sh/brain.sh "$@"
     	;;
+    "🧬"|"unfold") # Genetic Projection / Mass Genesis
+        ./sh/unfold.sh "$@"
+        ;;
     *)
         echo "Unknown glyph: $GLYPH"
         # Передаємо команду в системний git (fallback)
