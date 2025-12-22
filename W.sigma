@@ -22,3 +22,8 @@ where F: Fn(A) -> Box<dyn Fn(A) -> B>, A: Clone
     move |x| f(x.clone())(x)
 }
 ```
+
+@[dna]
+```dna
+W2
+```

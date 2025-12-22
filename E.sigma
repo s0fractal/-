@@ -22,3 +22,8 @@ where F: Fn(&T)
     move |x| { eff(&x); x }
 }
 ```
+
+@[dna]
+```dna
+E1
+```

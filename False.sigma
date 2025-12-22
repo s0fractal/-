@@ -18,3 +18,8 @@ export const False = <A, B>(x: A) => (y: B): B => y;
 ```rust
 pub fn False<A, B>(_x: A, y: B) -> B { y }
 ```
+
+@[dna]
+```dna
+F1
+```

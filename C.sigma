@@ -14,12 +14,9 @@ Flips the order of arguments.
 export const C = <A, B, C>(f: (x: A) => (y: B) => C) => (y: B) => (x: A): C => f(x)(y);
 ```
 
-@[rs]
-```rust
-pub fn C<A, B, C, F>(f: F) -> impl Fn(B) -> Box<dyn Fn(A) -> C>
-where F: Fn(A) -> Box<dyn Fn(B) -> C>
-{
-    // Rust complexity with currying is high, implementation symbolic
-    todo!()
-}
+```
+
+@[dna]
+```dna
+C2
 ```

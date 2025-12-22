@@ -16,3 +16,5 @@ Definition: [ ID, STORAGE, PATH, SYNTAX, COLOR ]
 
 [ json,  virtual,   json/,  json,   #F7DF1E ]
 
+[ dna,   virtual,   dna/,   glyphs, #00FF00 ]
+

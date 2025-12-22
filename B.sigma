@@ -24,3 +24,8 @@ where
     move |x| f(g(x))
 }
 ```
+
+@[dna]
+```dna
+B2
+```

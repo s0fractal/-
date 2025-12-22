@@ -21,6 +21,11 @@ export const I = <T>(x: T): T => x;
 pub fn I<T>(x: T) -> T { x }
 ```
 
+@[dna]
+```dna
+I0
+```
+
 
 http://googleusercontent.com/immersive_entry_chip/0
 
