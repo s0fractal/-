@@ -8,8 +8,8 @@ if [ -z "$LAYER" ]; then echo "Usage: $0 <layer_number>"; exit 1; fi
 # Налаштування
 ORG="s0fractal"
 RING_NAME="$LAYER"
-# DIMS: The dimensions we support - DNA (pure source), MD (Chronicles), TS (Logic), RS (Force), LEAN (Proof)
-DIMS=("ts" "rs" "lean" "md" "dna") 
+# DIMS: The dimensions we support - 🧬 (Pure Source), MD (Chronicles), TS (Logic), RS (Force), LEAN (Proof)
+DIMS=("ts" "rs" "lean" "md" "🧬") 
 
 echo "🪐 Forging Ring Layer: $LAYER..."
 
