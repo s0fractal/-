@@ -12,6 +12,9 @@ case "$GLYPH" in
     "⊕") # Create / Expand
         ./sh/expand.sh "$@"
         ;;
+    "∞"|"loop") # Iterate
+        ./sh/loop.sh "$@"
+        ;;
     "⋈") # Sync / Join
         echo "🔄 Aligning timelines..."
         git pull && git submodule update --init --recursive
