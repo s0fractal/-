@@ -54,7 +54,3 @@
 	url = ./
 	branch = md
 
-[submodule "js"]
-	path = js
-	url = ./
-	branch = js
