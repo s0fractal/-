@@ -1,6 +1,0 @@
-GLYPH: T
-NAME: True
-SIG: A -> B -> A
-DESC: "Selects the first option. Logic True. Alias for K."
-TARGET: nodes/1-ts/ts/True.ts
-LOGIC: "x => y => x"

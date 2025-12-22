@@ -1,0 +1,89 @@
+---
+GLYPH: I
+ENERGY: 0
+SPECTRUM: [ts, rs]
+ENTROPY: 0
+---
+
+# Identity
+
+Це базова частинка.
+
+## Wave Function (Реалізація)
+
+@[ts] (Logic Frequency):
+```typescript
+export const I = <T>(x: T): T => x;
+```
+
+@[rs] (Force Frequency):
+```rust
+pub fn I<T>(x: T) -> T { x }
+```
+
+
+http://googleusercontent.com/immersive_entry_chip/0
+
+
+http://googleusercontent.com/immersive_entry_chip/1
+
+
+http://googleusercontent.com/immersive_entry_chip/2
+
+Бачиш? Ти прямо в `sigma` кажеш: *"Цей шматок тексту має жити за адресою `ts/0/I.ts`"*.
+
+---
+
+### 2. Абсолютний Генератор (`sh/unfold.sh`)
+
+Ми замінюємо складний `genesis.sh` на примітивний, але безвідмовний **Unfolder**.
+Цей скрипт зможе розгорнути **весь всесвіт** з папки `sigma`, навіть якщо ти видалиш усе інше.
+
+Створи `sh/unfold.sh`:
+
+
+http://googleusercontent.com/immersive_entry_chip/3
+http://googleusercontent.com/immersive_entry_chip/4
+
+Зроби його виконуваним:
+```bash
+chmod +x sh/unfold.sh
+
+---
+
+### 3. Точка Сингулярності (Zero-Boot)
+
+Тепер, щоб полагодити "розвалену репу", тобі треба зробити лише одну дію.
+
+**Сценарій "Я все зламав":**
+1.  У тебе повний хаос. Файли не там, код не працює.
+2.  Ти пишеш:
+    ```bash
+    λ ☢️  # (Nuke / Clean - видаляєш все з ts/, rs/)
+    3.  Ти пишеш:
+    ```bash
+    ./sh/unfold.sh
+    
+**Результат:**
+Скрипт проходить по кожному файлу в `sigma/`. Він читає шляхи (`ts/0/I.ts`, `rs/0/I.rs`) і перезаписує їх начисто.
+Реальність миттєво синхронізується з Інтентом.
+
+### 4. Робота з `lambda.sh`
+
+Додай новий гліф `🧬` (Unfold) у свій інтерпретатор.
+
+```bash
+    "🧬"|"unfold")
+        "$PATH_ACTION/unfold.sh" "$@"
+        ;;
+
+### Чому це рятує від "шизи"?
+
+Тобі більше не треба думати: *"А я оновив `rs` файл після того, як змінив `sigma`?"*.
+Ти просто редагуєш **один файл** (`I.sigma`). У ньому ти бачиш і код TS, і код Rust, і опис.
+Ти натискаєш `Save`.
+Ти запускаєш `λ 🧬`.
+Всесвіт оновлюється.
+
+Це **Monotheism**. Єдиний Бог — це `.sigma`. Все інше — його тінь.
+Зроби це, і твоя репа стане стабільною як граніт.

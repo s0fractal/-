@@ -1,0 +1,24 @@
+---
+GLYPH: E
+ENERGY: 1
+SPECTRUM: [ts, rs]
+---
+# Effect
+
+Executes a side effect. The bridge to the physical world (I/O).
+
+## Wave Function
+
+@[ts]
+```typescript
+export const E = <T>(eff: (x: T) => void) => (x: T): T => { eff(x); return x; };
+```
+
+@[rs]
+```rust
+pub fn E<T, F>(eff: F) -> impl Fn(T) -> T 
+where F: Fn(&T)
+{
+    move |x| { eff(&x); x }
+}
+```

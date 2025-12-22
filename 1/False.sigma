@@ -1,6 +1,0 @@
-GLYPH: F
-NAME: False
-SIG: A -> B -> B
-DESC: "Selects the second option. Logic False. Derived from K(I)."
-TARGET: nodes/1-ts/ts/False.ts
-LOGIC: "x => y => y"

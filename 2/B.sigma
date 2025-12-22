@@ -1,6 +1,0 @@
-GLYPH: B
-NAME: Bluebird (Compose)
-SIG: (B -> C) -> (A -> B) -> A -> C
-DESC: "Composition. Connects the output of one to the input of another."
-TARGET: nodes/2-ts/ts/B.ts
-LOGIC: "f => g => x => f(g(x))"

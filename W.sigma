@@ -1,0 +1,24 @@
+---
+GLYPH: W
+ENERGY: 2
+SPECTRUM: [ts, rs]
+---
+# Warbler (Duplicate)
+
+Duplicates the argument.
+
+## Wave Function
+
+@[ts]
+```typescript
+export const W = <A, B>(f: (x: A) => (y: A) => B) => (x: A): B => f(x)(x);
+```
+
+@[rs]
+```rust
+pub fn W<A, B, F>(f: F) -> impl Fn(A) -> B
+where F: Fn(A) -> Box<dyn Fn(A) -> B>, A: Clone
+{
+    move |x| f(x.clone())(x)
+}
+```

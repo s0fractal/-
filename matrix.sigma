@@ -1,0 +1,18 @@
+Σ-MATRIX: THE BASIS VECTORS
+
+Definition: [ ID, STORAGE, PATH, SYNTAX, COLOR ]
+
+[ sigma, submodule, sigma/, yaml,   #CC00FF ]
+
+[ ts,    submodule, ts/,    ts,     #3388FF ]
+
+[ rs,    submodule, rs/,    rust,   #FF4433 ]
+
+[ sh,    folder,    sh/,    bash,   #44FF88 ]
+
+[ rb,    folder,    rb/,    ruby,   #FFD700 ]
+
+[ md,    virtual,   md/,    md,     #AAAAAA ]
+
+[ json,  virtual,   json/,  json,   #F7DF1E ]
+

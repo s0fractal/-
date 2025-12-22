@@ -1,0 +1,20 @@
+---
+GLYPH: F
+ENERGY: 1
+SPECTRUM: [ts, rs]
+---
+# False
+
+Logical False (Kite). Selects the second option. I matches Identity I but usually represented as `x => y => y` which is `KI`.
+
+## Wave Function
+
+@[ts]
+```typescript
+export const False = <A, B>(x: A) => (y: B): B => y;
+```
+
+@[rs]
+```rust
+pub fn False<A, B>(_x: A, y: B) -> B { y }
+```

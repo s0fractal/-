@@ -1,0 +1,26 @@
+```
+---
+GLYPH: K
+ENERGY: 1
+SPECTRUM: [ts, rs]
+---
+# Kestrel (Constant)
+
+Returns a constant function. Discards the second argument.
+
+## Wave Function
+
+@[ts]
+```typescript
+export const K = <A, B>(x: A) => (y: B): A => x;
+```
+
+@[rs]
+```rust
+pub fn K<A, B>(x: A) -> impl Fn(B) -> A + Clone 
+where A: Clone
+{
+    move |_| x.clone()
+}
+```
+```
