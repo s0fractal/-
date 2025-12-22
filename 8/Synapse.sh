@@ -1,0 +1,41 @@
+#!/bin/bash
+# 🛑 QUANTUM STATE: COLLAPSED FROM Synapse.sigma
+# 🌊 FREQUENCY: sh | ENERGY: 8
+# s0fractal Synapse v1.1 (Neural Context)
+# Generated from Synapse.sigma
+
+source "$(dirname "${BASH_SOURCE[0]}")/tensor.sh"
+λ() { "$REPO_ROOT/sh/lambda.sh" "$@"; }
+
+echo "--- SYSTEM CONTEXT START ---"
+echo "Root: $REPO_ROOT"
+echo "Citizen: $(whoami)"
+
+# 1. TOPOLOGY (Dynamic)
+echo "### TOPOLOGY (Matrix)"
+λ loop dims "ls -d . 2>/dev/null || echo '[Mirage]'"
+echo ""
+
+# 2. LEXICON (Protocol)
+LEXICON_DIR="$REPO_ROOT/sigma/chaos/lexicon"
+if [ -d "$LEXICON_DIR" ]; then
+    echo "### LEXICON (Protocols)"
+    ls "$LEXICON_DIR" | sed 's/^/- /'
+fi
+echo ""
+
+# 3. INTENT (Active DNA)
+echo "### SIGMA (Active Intents)"
+# Show first lines of all .sigma files to give context on what particles exist
+for particle in "$REPO_ROOT/sigma"/*.sigma; do
+    [ -f "$particle" ] || continue
+    echo "- $(basename "$particle"): $(head -n 2 "$particle" | tail -n 1 | sed 's/^# //')"
+done
+echo ""
+
+# 4. HEALTH
+echo "### VITAL SIGNS"
+λ ⚕️ | grep -v "Scanning"
+echo ""
+
+echo "--- SYSTEM CONTEXT END ---"

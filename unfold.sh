@@ -1,18 +1,7 @@
 #!/bin/bash
-# s0fractal Unfolder v1.0
-# Collapses the entire Sigma Field into Material Reality.
+# 🛑 QUANTUM STATE: COLLAPSED FROM Sync.sigma
+# 🌊 FREQUENCY: sh | ENERGY: 8
+# Sync Protocol (Self-Hosted Redirect)
+# ⚠️ EDITS TO BE MADE IN sigma/Sync.sigma
 
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-REPO_ROOT="$(dirname "$SCRIPT_DIR")"
-
-echo "🧬 Engaging Unfold Protocol..."
-
-# Iterate over all .sigma files in the root of sigma/
-for particle in "$REPO_ROOT/sigma"/*.sigma; do
-    # Skip matrix.sigma
-    if [[ "$particle" == *"matrix.sigma" ]]; then continue; fi
-    
-    "$SCRIPT_DIR/genesis.sh" "$particle"
-done
-
-echo "✅ Universe Synchronized."
+source "$(dirname "${BASH_SOURCE[0]}")/8/Sync.sh"

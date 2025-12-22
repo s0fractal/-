@@ -1,54 +1,7 @@
 #!/bin/bash
+# 🛑 QUANTUM STATE: COLLAPSED FROM Lambda.sigma
+# 🌊 FREQUENCY: sh | ENERGY: 8
+# λ-Protocol Interpreter (Self-Hosted Redirect)
+# ⚠️ EDITS TO BE MADE IN sigma/Lambda.sigma
 
-# λ-Protocol Interpreter v1.1
-# Usage: λ <glyph> [args]
-
-GLYPH=$1
-
-# Якщо пустий ввід - показуємо карту
-if [ -z "$GLYPH" ]; then GLYPH="map"; else shift; fi
-
-case "$GLYPH" in
-    "⊕") # Create / Expand
-        ./sh/expand.sh "$@"
-        ;;
-    "∞"|"loop") # Iterate
-        ./sh/loop.sh "$@"
-        ;;
-    "⋈") # Sync / Join
-        echo "🔄 Aligning timelines..."
-        git pull && git submodule update --init --recursive
-        ;;
-    "?"|"map") # Query / Status
-        git universe
-        ;;
-    "Δ") # Change / Commit
-        MSG="$@"
-        if [ -z "$MSG" ]; then MSG="Δ mutation"; fi
-        git add .
-        git commit -m "Δ $MSG"
-        git push
-        ;;
-    "⚕️"|"doctor") # Health
-        ./sh/doctor.sh
-        ;;
-    "#") # Executable Comment
-        echo "🔮 Executing shadow code..."
-        eval "$@"
-        ;;
-    "🧠"|"brain") # Local AI
-        ./sh/brain.sh "$@"
-    	;;
-    "🧬"|"unfold") # Genetic Projection / Mass Genesis
-        ./sh/unfold.sh "$@"
-        ;;
-    "Y"|"process") # Recursion / Daemon
-        source ./sh/7/Y.sh
-        Y "$@"
-        ;;
-    *)
-        echo "Unknown glyph: $GLYPH"
-        # Передаємо команду в системний git (fallback)
-        git $GLYPH "$@"
-        ;;
-esac
+source "$(dirname "${BASH_SOURCE[0]}")/8/Lambda.sh"
