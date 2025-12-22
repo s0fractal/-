@@ -1,87 +1,123 @@
 #!/bin/bash
-# s0fractal Genesis v2.0
-# Transmutes Intent (.sigma) into Matter (.ts/.rs) by extracting code blocks.
+# s0fractal Genesis v3.0 (Quantum Observer)
+# Collapses .sigma Wave Functions into Material Reality based on Energy and Spectrum.
 
 # Usage: λ genesis <path/to/file.sigma>
 
 SOURCE="$1"
-if [ -z "$SOURCE" ]; then echo "Usage: ./genesis.sh <recipe.sigma>"; exit 1; fi
+if [ -z "$SOURCE" ]; then echo "Usage: ./genesis.sh <particle.sigma>"; exit 1; fi
 
-# Load Context
+# Load Context and Tensor Engine
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-source "$SCRIPT_DIR/env.sh"
+source "$SCRIPT_DIR/tensor.sh"
 
-echo "🔥 Materializing spirit from $SOURCE..."
+echo "👁️  Observing Quantum State: $SOURCE..."
 
-# 0. Context Recognition (Layer Detection)
-# Try to extract layer from path: .../sigma/1/File.sigma -> LAYER=1
-if [[ "$SOURCE" =~ sigma/([0-9]+)/ ]]; then
-    LAYER="${BASH_REMATCH[1]}"
-    echo "   📍 Context: Layer $LAYER"
-else
-    # Fallback/Chaos
-    LAYER=""
-    echo "   📍 Context: Unknown/Global (No layer detected in path)"
+# --- 1. Parse Quantum Numbers (Frontmatter) ---
+# Read everything between first pair of "---"
+# Extract GLYPH, ENERGY (and optional SPECTRUM for validation)
+
+ENERGY=""
+GLYPH=""
+
+IN_FM=0
+LINE_NUM=0
+while IFS= read -r line; do
+    ((LINE_NUM++))
+    if [[ "$line" == "---" ]]; then
+        if [ $IN_FM -eq 0 ]; then IN_FM=1; continue; fi
+        if [ $IN_FM -eq 1 ]; then IN_FM=0; break; fi # End of Frontmatter
+    fi
+    
+    if [ $IN_FM -eq 1 ]; then
+        if [[ "$line" =~ ^ENERGY:[[:space:]]*(.*)$ ]]; then
+            ENERGY="${BASH_REMATCH[1]}"
+        elif [[ "$line" =~ ^GLYPH:[[:space:]]*(.*)$ ]]; then
+            GLYPH="${BASH_REMATCH[1]}"
+        fi
+    fi
+done < "$SOURCE"
+
+if [ -z "$ENERGY" ] || [ -z "$GLYPH" ]; then
+    echo "⚠️  Quantum Decoherence: Missing ENERGY or GLYPH in Frontmatter."
+    # Fallback / Legacy mode or Error? Let's error to enforce new physics.
+    exit 1
 fi
 
-# 1. Parsing & Materialization
+echo "   ⚛️  Particle Detected: '$GLYPH' (Energy Level: $ENERGY)"
+
+# --- 2. Wave Collapse (Body Parsing) ---
+# Scan for @[freq] blocks and materialize them.
+
 IN_BLOCK=0
+CAPTURING_CODE=0
+CURRENT_FREQ=""
 TARGET_FILE=""
 
 while IFS= read -r line; do
-    # Початок блоку: ` ```lang:path/to/file `
-    # Regex captures everything after the colo as the relative path
-    if [[ "$line" =~ ^\`\`\`[a-zA-Z0-9_-]+:(.+) ]]; then
-        REL_PATH="${BASH_REMATCH[1]}"
+    # Start of Frequency Block: @[ts] ...
+    if [[ "$line" =~ ^@\[([a-z]+)\] ]]; then
+        CURRENT_FREQ="${BASH_REMATCH[1]}"
         
-        # Determine Dimension based on extension
-        EXTENSION="${REL_PATH##*.}"
-        DIMENSION=""
-        
-        case "$EXTENSION" in
-            ts) DIMENSION="ts" ;;
-            rs) DIMENSION="rs" ;;
-            lean) DIMENSION="lean" ;;
-            sh) DIMENSION="sh" ;;
-            rb) DIMENSION="rb" ;;
-            md) DIMENSION="md" ;;
-            *)  DIMENSION="unknown" ;;
-        esac
-        
-        # Route to Target
-        if [ -n "$LAYER" ] && [ "$DIMENSION" != "unknown" ]; then
-            # Magic: Inject into the Dimension's Layer Node
-            # e.g. void/ts/0/I.ts
-            TARGET_FILE="$REPO_ROOT/$DIMENSION/$LAYER/$REL_PATH"
-        else
-            # Explicit path or global dimension
-            TARGET_FILE="$REPO_ROOT/$REL_PATH"
+        # Consult Matrix for this Frequency
+        VECTOR=$(get_vector "$CURRENT_FREQ")
+        if [ -z "$VECTOR" ]; then
+            echo "   ⚠️  Unknown Frequency: $CURRENT_FREQ (No Tensor Vector found)"
+            IN_BLOCK=0
+            continue
         fi
-
-        echo "   ⚡ Materializing -> $DIMENSION/$LAYER/$(basename "$REL_PATH")"
         
-        # Ensure directory exists
+        IFS='|' read -r ID STORAGE PATH_VAL SYNTAX COLOR <<< "$VECTOR"
+        
+        # Collapse Wave Function -> Material Path
+        # Formula: $REPO_ROOT / $DIM_PATH / $ENERGY / $GLYPH . $EXTENSION
+        # We assume EXTENSION matches ID for simple types, or hardcode mapping if needed.
+        # For 'ts' -> .ts, 'rs' -> .rs. ID is reliable for extension in this system.
+        
+        EXT="$ID" 
+        # Fix for Rust if ID is 'rs' but ext is 'rs' (same). 
+        # If ID was 'rust', ext would be wrong. But Matrix has ID=rs.
+        
+        TARGET_FILE="$REPO_ROOT/$PATH_VAL/$ENERGY/$GLYPH.$EXT"
+        
+        echo "   ⚡ Collapsing Wave @[$ID] -> $PATH_VAL$ENERGY/$GLYPH.$EXT"
+        
+        # Ensure existence
         mkdir -p "$(dirname "$TARGET_FILE")"
         
-        # Clear/Create file with auto-generated header
-        echo "// 🛑 DO NOT EDIT. GENERATED FROM $(basename "$SOURCE")" > "$TARGET_FILE"
+        # Write Headers
+        echo "// 🛑 QUANTUM STATE: COLLAPSED FROM $(basename "$SOURCE")" > "$TARGET_FILE"
+        echo "// 🌊 FREQUENCY: $ID | ENERGY: $ENERGY" >> "$TARGET_FILE"
         
         IN_BLOCK=1
         continue
     fi
-
-    # Кінець блоку
-    if [[ "$line" == "\`\`\`" ]] && [ $IN_BLOCK -eq 1 ]; then
-        IN_BLOCK=0
-        TARGET_FILE=""
+    
+    # Code Block Delimiters
+    if [[ "$line" =~ ^\`\`\` ]]; then
+        # If we are in a freq block, we toggle the capture state
+        if [ $IN_BLOCK -eq 1 ]; then
+            if [ $CAPTURING_CODE -eq 1 ]; then
+                 # End of code block
+                 CAPTURING_CODE=0
+                 # We stay in IN_BLOCK (Freq) technically, but we stop writing?
+                 # Or do we treat end of code block as end of Freq Block?
+                 # Let's assume one code block per Freq Block for now for simplicity.
+                 IN_BLOCK=0 
+                 TARGET_FILE=""
+            else
+                 # Start of code block
+                 CAPTURING_CODE=1
+            fi
+        fi
         continue
     fi
-
-    # Запис вмісту
-    if [ $IN_BLOCK -eq 1 ]; then
-        echo "$line" >> "$TARGET_FILE"
+    
+    # Capture Content
+    if [ $IN_BLOCK -eq 1 ] && [ $CAPTURING_CODE -eq 1 ]; then
+       echo "$line" >> "$TARGET_FILE"
     fi
-
+    
 done < "$SOURCE"
 
-echo "✅ Genesis Complete."
+echo "✅ Observation Complete."

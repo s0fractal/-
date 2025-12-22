@@ -56,29 +56,61 @@ if [[ "$TARGET" =~ ^[0-9]+-[a-z]+$ ]]; then
     echo "✅ Node '$TARGET' is alive and connected."
 
 # --- Logic: DIMENSION (Internal Branch) ---
+# --- Logic: TENSOR (Matrix Dimensions) ---
 else
-    # (Ця частина без змін, але для повноти файлу...)
-    echo "🌌 Expanding Internal Dimension: '$TARGET'..."
-    ROOT_DIR=$(git rev-parse --show-toplevel)
-    CURRENT_BRANCH=$(git branch --show-current)
-    cd "$ROOT_DIR"
+    # Load Tensor Engine
+    source "$(dirname "$0")/tensor.sh"
     
-    if git show-ref --verify --quiet "refs/heads/$TARGET"; then
-        echo "⚠️  Dimension '$TARGET' already exists."
+    VECTOR=$(get_vector "$TARGET")
+    
+    if [ -n "$VECTOR" ]; then
+        IFS='|' read -r ID STORAGE PATH_VAL SYNTAX COLOR <<< "$VECTOR"
+        echo "🌌 Expanding Tensor Dimension: '$ID' ($STORAGE)..."
+        
+        # 1. Submodule Logic (Git Branch)
+        if [[ "$STORAGE" == "submodule" ]]; then
+             ROOT_DIR=$(git rev-parse --show-toplevel)
+             CURRENT_BRANCH=$(git branch --show-current)
+             cd "$ROOT_DIR"
+             
+             if [ -d "$PATH_VAL" ]; then
+                 echo "⚠️  Dimension '$ID' path '$PATH_VAL' already exists."
+             else
+                 # Check if branch exists
+                 if git show-ref --verify --quiet "refs/heads/$ID"; then
+                     echo "⚠️  Branch '$ID' already exists. Linking..."
+                 else
+                     echo "🌱 Genesis: Creating orphan branch '$ID'..."
+                     git checkout --orphan "$ID"
+                     git rm -rf .
+                     echo "# Dimension: $ID" > README.md
+                     git add README.md
+                     git commit -m "⊕ Genesis: $ID dimension"
+                     git push -u origin "$ID"
+                     git checkout "$CURRENT_BRANCH"
+                 fi
+                 
+                 # Add Submodule
+                 echo "🔗 Linking submodule '$PATH_VAL'..."
+                 git submodule add -b "$ID" ./ "$PATH_VAL"
+                 git commit -m "Link dimension: $ID"
+                 git push origin "$CURRENT_BRANCH"
+             fi
+             
+        # 2. Folder Logic (Simple Directory)
+        elif [[ "$STORAGE" == "folder" ]] || [[ "$STORAGE" == "virtual" ]]; then
+             if [ -d "$PATH_VAL" ]; then
+                 echo "✅ Folder '$PATH_VAL' already exists."
+             else
+                 echo "📂 Creating folder '$PATH_VAL'..."
+                 mkdir -p "$PATH_VAL"
+                 touch "$PATH_VAL/.keep"
+             fi
+        fi
+        echo "✅ Dimension '$ID' expanded."
+        
     else
-        git checkout --orphan "$TARGET"
-        git rm -rf .
-        echo "# Dimension: $TARGET" > README.md
-        git add README.md
-        git commit -m "⊕ Genesis: $TARGET dimension"
-        git push -u origin "$TARGET"
+        echo "❌ Unknown Target: '$TARGET'. Not a file, node, or matrix dimension."
+        exit 1
     fi
-    
-    git checkout "$CURRENT_BRANCH"
-    if [ ! -d "$TARGET" ]; then
-        git submodule add -b "$TARGET" ./ "$TARGET"
-        git commit -m "Link dimension: $TARGET"
-        git push origin "$CURRENT_BRANCH"
-    fi
-    echo "✅ Internal Dimension '$TARGET' expanded."
 fi
