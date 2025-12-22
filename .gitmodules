@@ -37,3 +37,7 @@
 [submodule "lean/2"]
 	path = lean/2
 	url = https://github.com/s0fractal/2-lean.git
+[submodule "yml"]
+	path = yml
+	url = ./
+	branch = yml
