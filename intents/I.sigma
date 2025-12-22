@@ -1,0 +1,12 @@
+# Σ-Intent: Identity
+# Це чиста душа. Вона не має мови.
+
+GLYPH: I
+NAME: Identity
+SIG: T -> T
+DESC: "Returns the essence unchanged."
+
+# Проекція (як це має виглядати в матерії)
+# Це інструкція для генератора
+TARGET: nodes/0-ts/ts/I.ts
+MODE: pure
