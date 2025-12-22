@@ -122,3 +122,20 @@ if [ -d "$HOOK_DIR" ]; then
 fi
 
 echo "🚀 s0fractal system operational."
+# ... existing code ...
+
+# ==========================================
+# 5. HUD INJECTION (The Face of the Void)
+# ==========================================
+if [ -n "$TARGET_RC" ]; then
+    HUD_CMD="$REPO_ROOT/sh/hud.sh"
+    if ! grep -q "sh/hud.sh" "$TARGET_RC"; then
+        echo "" >> "$TARGET_RC"
+        echo "# s0fractal HUD" >> "$TARGET_RC"
+        echo "[ -f \"$HUD_CMD\" ] && \"$HUD_CMD\"" >> "$TARGET_RC"
+        echo "✅ HUD injected into startup."
+    fi
+fi
+
+echo "🚀 s0fractal system operational."
+
