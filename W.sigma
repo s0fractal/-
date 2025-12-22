@@ -1,7 +1,7 @@
 ---
 GLYPH: W
 ENERGY: 2
-SPECTRUM: [ts, rs]
+SPECTRUM: [ts, rs, sh, dna]
 ---
 # Warbler (Duplicate)
 
@@ -20,6 +20,20 @@ pub fn W<A, B, F>(f: F) -> impl Fn(A) -> B
 where F: Fn(A) -> Box<dyn Fn(A) -> B>, A: Clone
 {
     move |x| f(x.clone())(x)
+}
+```
+
+@[sh]
+```bash
+# W (Fork/Witness): Дублює потік у файл або процес, повертає потік далі
+# Usage: echo "data" | W "log.txt" | ...
+W() {
+    local TARGET=$1
+    if [ -z "$TARGET" ]; then
+        tee # Просто дублює в stdout (подвійний потік)
+    else
+        tee "$TARGET"
+    fi
 }
 ```
 

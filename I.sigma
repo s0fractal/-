@@ -1,7 +1,7 @@
 ---
 GLYPH: I
 ENERGY: 0
-SPECTRUM: [ts, rs]
+SPECTRUM: [ts, rs, sh, dna]
 ENTROPY: 0
 ---
 
@@ -19,6 +19,15 @@ export const I = <T>(x: T): T => x;
 @[rs] (Force Frequency):
 ```rust
 pub fn I<T>(x: T) -> T { x }
+```
+
+@[sh]
+```bash
+# I (Identity): Просто пропускає дані далі
+# Usage: echo "data" | I
+I() {
+    cat -
+}
 ```
 
 @[dna]

@@ -1,7 +1,7 @@
 ---
 GLYPH: K
 ENERGY: 1
-SPECTRUM: [ts, rs]
+SPECTRUM: [ts, rs, sh, dna]
 ---
 # Kestrel (Constant)
 
@@ -20,6 +20,17 @@ pub fn K<A, B>(x: A) -> impl Fn(B) -> A + Clone
 where A: Clone
 {
     move |_| x.clone()
+}
+```
+
+@[sh]
+```bash
+# K (Constant): Ігнорує потік, видає аргумент
+# Usage: echo "noise" | K "truth" -> "truth"
+K() {
+    # Вичитуємо stdin в нікуди (щоб не ламати пайп), виводимо аргумент
+    cat > /dev/null
+    echo "$1"
 }
 ```
 

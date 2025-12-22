@@ -1,7 +1,7 @@
 ---
 GLYPH: E
 ENERGY: 1
-SPECTRUM: [ts, rs]
+SPECTRUM: [ts, rs, sh, dna]
 ---
 # Effect
 
@@ -20,6 +20,22 @@ pub fn E<T, F>(eff: F) -> impl Fn(T) -> T
 where F: Fn(&T)
 {
     move |x| { eff(&x); x }
+}
+```
+
+@[sh]
+```bash
+# E (Effect/Side-Effect): Робить щось (виводить в stderr), не ламаючи потік
+# Usage: echo "data" | E "Processing..." | ...
+E() {
+    local MSG=$1
+    # Читаємо потік рядок за рядком
+    while IFS= read -r line; do
+        # Робимо ефект (наприклад, лог в stderr)
+        echo "⚡ $MSG: $line" >&2
+        # Пропускаємо дані далі (Identity)
+        echo "$line"
+    done
 }
 ```
 
