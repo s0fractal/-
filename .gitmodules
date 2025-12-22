@@ -41,3 +41,7 @@
 	path = yml
 	url = ./
 	branch = yml
+[submodule "yaml"]
+	path = yaml
+	url = ./
+	branch = yaml
