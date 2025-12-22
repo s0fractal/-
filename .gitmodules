@@ -3,7 +3,7 @@
 	url = ./
 	branch = sh
 [submodule "glyphs"]
-	path = glyphs
+	path = sigma
 	url = ./
 	branch = glyphs
 [submodule "intents"]
@@ -11,8 +11,29 @@
 	url = ./
 	branch = intents
 [submodule "nodes/1-ts"]
-	path = nodes/1-ts
+	path = ts/1
 	url = git@github.com:s0fractal/1-ts.git
 [submodule "nodes/2-ts"]
-	path = nodes/2-ts
+	path = ts/2
 	url = git@github.com:s0fractal/2-ts.git
+[submodule "ts/0"]
+	path = ts/0
+	url = https://github.com/s0fractal/0-ts.git
+[submodule "rs/0"]
+	path = rs/0
+	url = https://github.com/s0fractal/0-rs.git
+[submodule "rs/1"]
+	path = rs/1
+	url = https://github.com/s0fractal/1-rs.git
+[submodule "rs/2"]
+	path = rs/2
+	url = https://github.com/s0fractal/2-rs.git
+[submodule "lean/0"]
+	path = lean/0
+	url = https://github.com/s0fractal/0-lean.git
+[submodule "lean/1"]
+	path = lean/1
+	url = https://github.com/s0fractal/1-lean.git
+[submodule "lean/2"]
+	path = lean/2
+	url = https://github.com/s0fractal/2-lean.git
