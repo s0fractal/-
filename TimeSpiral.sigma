@@ -1,0 +1,211 @@
+---
+glyph: 🌀
+name: The Time Spiral
+energy: 8
+spectrum: [sigma, dna]
+type: protocol
+desc: "The Registry of Completed Vibrations. Each Turn is a sealed state of Reality."
+physics:
+  mass: 1.5kb
+  entropy: Low
+  complexity: O(log n)
+---
+
+# SPIRAL PROTOCOL
+
+Ми не використовуємо версії (`v1.0`). Ми використовуємо **Оберти** (Turns).
+
+## The Law of Three
+
+Щоб закрити оберт, потрібен **Потрійний Резонанс**:
+
+```
+Hash(TS) ⊕ Hash(RS) ⊕ Hash(Intent) = Seal
+```
+
+**Правило:** Якщо сума не сходиться — навігація блокується.
+
+### Interpretation
+
+- **Hash(TS)**: Хеш всіх TypeScript файлів у волокні `ts/`
+- **Hash(RS)**: Хеш всіх Rust файлів у волокні `rs/`
+- **Hash(Intent)**: Хеш всіх `.sigma` файлів у базі `sigma/`
+- **Seal**: Унікальний ідентифікатор оберту (криптографічна печатка)
+
+## Chronology (The Log)
+
+| Turn | Glyph | Hash (Seal) | Status |
+|------|-------|-------------|--------|
+| 0    | I     | `a3f5...`   | 🔒 Sealed |
+| 1    | K     | `b7e2...`   | 🔒 Sealed |
+| 2    | ⛓️    | `c9d1...`   | 🔒 Sealed |
+| 3    | 📐    | `d4a8...`   | 🔒 Sealed |
+| 4    | §     | `e6b3...`   | 🟡 Flux |
+
+### Status Legend
+
+- **🔒 Sealed**: Оберт завершено, хеш зафіксовано, навігація дозволена
+- **🟡 Flux**: Оберт у процесі, зміни активні, навігація обмежена
+- **🔴 Broken**: Порушення резонансу, потрібна синхронізація
+
+## Turn Structure
+
+Кожен оберт — це **атомарний стан всесвіту**:
+
+```typescript
+interface Turn {
+  id: number;           // Sequential turn number
+  glyph: string;        // Primary glyph of this turn
+  timestamp: Date;      // When sealed
+  seal: string;         // Hash(TS) ⊕ Hash(RS) ⊕ Hash(Intent)
+  status: TurnStatus;   // 🔒 | 🟡 | 🔴
+  
+  hashes: {
+    intent: string;     // Hash of sigma/
+    ts: string;         // Hash of ts/
+    rs: string;         // Hash of rs/
+    sh: string;         // Hash of sh/
+  };
+  
+  message: string;      // Commit message
+  author: string;       // Who sealed this turn
+}
+```
+
+## Sealing a Turn
+
+### Prerequisites
+
+1. **All Proofs Valid**: Всі файли мають статус 🟢 (Harmony)
+2. **Triple Resonance**: `Hash(TS) ⊕ Hash(RS) ⊕ Hash(Intent)` сходиться
+3. **No Phantoms**: Немає коду без Intent
+
+### Sealing Process
+
+```bash
+# 1. Verify all proofs
+λ § verify
+
+# 2. Calculate triple resonance
+λ 🌀 seal
+
+# 3. If valid, create turn
+Turn 4 sealed: 🌀 e6b3c2a1...
+Status: 🔒 Sealed
+```
+
+### Seal Calculation
+
+```typescript
+function calculateSeal(turn: Turn): string {
+  const intentHash = hashDirectory('sigma/');
+  const tsHash = hashDirectory('ts/');
+  const rsHash = hashDirectory('rs/');
+  const shHash = hashDirectory('sh/');
+  
+  // XOR all hashes
+  const seal = xor(intentHash, tsHash, rsHash, shHash);
+  
+  return seal;
+}
+```
+
+## Navigation Rules
+
+### Forward Navigation (Time Travel)
+
+```bash
+λ 🌀 goto 3  # Jump to Turn 3
+```
+
+**Правило:** Можна переходити тільки до **sealed** обертів (🔒).
+
+### Backward Navigation (Rollback)
+
+```bash
+λ 🌀 rollback 2  # Return to Turn 2
+```
+
+**Наслідок:** Всі оберти після Turn 2 стають **unsealed** (🟡).
+
+### Current Turn
+
+```bash
+λ 🌀 current
+# Turn 4: § (Proof of Intent)
+# Status: 🟡 Flux
+# Seal: pending...
+```
+
+## The Spiral Visualization
+
+```
+        🌀 Time Spiral
+        
+    Turn 4 (§) 🟡 ← Current
+        ↑
+    Turn 3 (📐) 🔒
+        ↑
+    Turn 2 (⛓️) 🔒
+        ↑
+    Turn 1 (K) 🔒
+        ↑
+    Turn 0 (I) 🔒 ← Genesis
+```
+
+## Spiral Registry
+
+Зберігається у `sigma/spiral.log`:
+
+```
+# Spiral Registry
+# Format: Turn | Glyph | Seal | Timestamp | Status
+
+0 | I  | a3f5c2e1... | 2025-12-20T10:00:00Z | 🔒
+1 | K  | b7e2d4a8... | 2025-12-21T14:30:00Z | 🔒
+2 | ⛓️ | c9d1f6b3... | 2025-12-22T18:45:00Z | 🔒
+3 | 📐 | d4a8e7c2... | 2025-12-23T05:30:00Z | 🔒
+4 | §  | pending...  | 2025-12-23T06:20:00Z | 🟡
+```
+
+## Enforcement
+
+### Pre-Commit Hook
+
+```bash
+#!/bin/bash
+# .git/hooks/pre-commit
+
+# Verify triple resonance
+SEAL=$(λ 🌀 verify)
+
+if [ "$SEAL" != "valid" ]; then
+  echo "🔴 Triple Resonance broken!"
+  echo "Cannot commit. Run: λ 🧬 sync"
+  exit 1
+fi
+
+echo "🟢 Triple Resonance verified"
+exit 0
+```
+
+### Auto-Seal on Push
+
+```bash
+# After successful push
+λ 🌀 seal --auto
+# Turn 4 sealed: § e6b3c2a1...
+```
+
+## Philosophy
+
+**Час — це не лінія. Час — це спіраль.**
+
+Кожен оберт — це **замкнений цикл резонансу**, де Intent, Code, і Reality сходяться в одній точці.
+
+Ми не "оновлюємо версії". Ми **завершуємо оберти**.
+
+@[dna]
+```dna
+Σ8:🌀
+```

@@ -1,0 +1,161 @@
+---
+glyph: 📐
+name: The Topological Canon
+energy: 0
+spectrum: [sigma, dna]
+type: axiom
+desc: "Axioms of Mirror Topology: The filesystem as a Fibered Space"
+physics:
+  mass: 1kb
+  entropy: Zero
+  complexity: O(1)
+---
+
+# THE CANON OF MIRROR TOPOLOGY
+
+Ми не використовуємо файлову систему як "склад". Ми використовуємо її як **Розшарований Простір** (Fibered Space).
+
+## 1. Axioms of Mapping
+
+### Isomorphism
+Структура папок у FIBER (`ts/`) повинна бути суворо ізоморфною до BASE (`sigma/`).
+
+```
+Directory(TS) ≅ Directory(Σ)
+```
+
+**Наслідок**: Якщо в `sigma/` є `sigma/laws/`, то в `ts/` має бути `ts/laws/`.
+
+### Injectivity
+Кожен `.sigma` файл має рівно одну канонічну реалізацію в кожному активному волокні.
+
+```
+f: Intent → Code є ін'єкцією
+```
+
+**Заборона**: Не може бути двох файлів `I.ts` для одного `I.sigma`.
+
+### Surjectivity (via Chaos)
+Кожен файл коду повинен мати своє джерело в `sigma/`.
+
+```
+∀ code ∈ Fiber, ∃ intent ∈ Base: Genesis(intent) = code
+```
+
+**Правило**: Якщо в `ts/` є файл, якого немає в `sigma/`, це **фантом**. Він має бути:
+- Знищений (якщо застарілий)
+- Легалізований через `chaos/` (якщо експериментальний)
+
+## 2. Terminology
+
+| Термін | Позначення | Опис |
+|--------|------------|------|
+| **Base** | $B$ | `sigma/` — простір істинних імен (Intent Space) |
+| **Fiber** | $F$ | `ts/`, `rs/`, `sh/` — простір реалізацій (Code Space) |
+| **Section** | $s$ | `genesis.sh` — оператор, що будує шлях від $B$ до $F$ |
+| **Singularity** | $\emptyset$ | `void/` — точка, де всі волокна зв'язані вузлом (submodules) |
+| **Phantom** | $\phi$ | Код без Intent — порушення Surjectivity |
+| **Chaos** | $\chi$ | `sigma/chaos/` — простір експериментів, що не пройшли канонізацію |
+
+## 3. The Grand Commutation
+
+Існує два оператори, що утворюють комутативну діаграму:
+
+```
+         Genesis
+Intent ---------> Code
+  ^                |
+  |                |
+  |    Absorb      |
+  +----------------+
+```
+
+### Forward Path (Materialization)
+```
+Code = Genesis(Intent)
+```
+
+**Genesis** проектує `.sigma` файл у всі активні волокна (`ts/`, `rs/`, `sh/`).
+
+### Reverse Path (Absorption)
+```
+Intent = Absorb(Code)
+```
+
+**Absorb** (поки не реалізовано) витягує Intent з існуючого коду, створюючи `.sigma` файл.
+
+### Commutative Property
+```
+Absorb(Genesis(Intent)) = Intent
+Genesis(Absorb(Code)) = Code
+```
+
+Цей цикл **комутативний**. Ми можемо йти в обидва боки без втрати інформації.
+
+## 4. Enforcement Rules
+
+### Rule 1: Structural Isomorphism
+```bash
+# VALID
+sigma/laws/CombinatoryLogic.sigma
+ts/laws/CombinatoryLogic.ts
+
+# INVALID (порушення ізоморфізму)
+sigma/laws/CombinatoryLogic.sigma
+ts/CombinatoryLogic.ts  # ❌ Неправильна структура
+```
+
+### Rule 2: Single Source of Truth
+```bash
+# VALID
+sigma/I.sigma → ts/0/I.ts
+
+# INVALID (порушення ін'єктивності)
+sigma/I.sigma → ts/0/I.ts
+sigma/I.sigma → ts/1/I.ts  # ❌ Дублікат
+```
+
+### Rule 3: No Orphans
+```bash
+# VALID
+ts/2/F.ts ← sigma/F.sigma  # Є джерело
+
+# INVALID (порушення сюр'єктивності)
+ts/2/Orphan.ts  # ❌ Немає sigma/Orphan.sigma
+```
+
+**Виправлення**: Або створити `sigma/Orphan.sigma`, або видалити `ts/2/Orphan.ts`.
+
+## 5. The Chaos Exception
+
+`sigma/chaos/` — це спеціальний простір для експериментів:
+- Файли в `chaos/` **не проектуються** автоматично
+- Вони можуть порушувати топологію
+- Коли експеримент стабілізується, він **канонізується** (переноситься в `sigma/`)
+
+```
+sigma/chaos/experimental.sigma  # Не матеріалізується
+         ↓
+    (тестування)
+         ↓
+sigma/experimental.sigma  # Канонізовано → матеріалізується
+```
+
+## 6. Verification Protocol
+
+Для перевірки топологічної чистоти:
+
+```bash
+λ ⚕️  # Doctor protocol
+```
+
+**Doctor** має перевіряти:
+1. ✅ Всі `.sigma` файли мають проекції у волокнах
+2. ✅ Всі файли у волокнах мають джерело в `sigma/`
+3. ✅ Структура папок ізоморфна
+4. ❌ Виявляти фантоми та пропонувати виправлення
+
+@[dna]
+```dna
+Σ0:📐
+```

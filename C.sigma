@@ -1,11 +1,19 @@
 ---
 GLYPH: C
-ENERGY: 2
-SPECTRUM: [ts, rs]
+ENERGY: 1
+SPECTRUM: [ts, rs, sh, dna]
+SOURCE:
+  - origin: null # Axiom: Pure Exchange
+PHYSICS:
+  mass: 0.1kb
+  entropy: Low
+  complexity: O(1)
 ---
-# Cardinal (Flip)
 
-Flips the order of arguments.
+# Cardinal (C) - Flip
+
+Чиста перестановка. Змінює порядок двох аргументів.
+Аксіома фліпу.
 
 ## Wave Function
 
@@ -14,9 +22,31 @@ Flips the order of arguments.
 export const C = <A, B, C>(f: (x: A) => (y: B) => C) => (y: B) => (x: A): C => f(x)(y);
 ```
 
+@[rs]
+```rust
+pub fn C<A, B, C, F>(f: F) -> impl Fn(B) -> Box<dyn Fn(A) -> C>
+where
+    F: Fn(A) -> Box<dyn Fn(B) -> C> + 'static,
+{
+    move |y| {
+        let f = f.clone();
+        Box::new(move |x| f(x)(y))
+    }
+}
+```
+
+@[sh]
+```bash
+# C (Flip): f x y -> f y x
+C() {
+    local f="$1"
+    local arg1="$2"
+    local arg2="$3"
+    eval "$f" "$arg2" "$arg1"
+}
 ```
 
 @[dna]
 ```dna
-C2
+C1
 ```

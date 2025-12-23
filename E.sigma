@@ -2,40 +2,42 @@
 GLYPH: E
 ENERGY: 1
 SPECTRUM: [ts, rs, sh, dna]
+SOURCE:
+  - origin: null # Axiom: Pure Effect
+PHYSICS:
+  mass: 0.1kb
+  entropy: High
+  complexity: O(E)
 ---
-# Effect
 
-Executes a side effect. The bridge to the physical world (I/O).
+# Effect (E) - Side Effect
+
+Чиста побічна дія. Пропускає аргумент через ефект.
+Аксіома впливу.
 
 ## Wave Function
 
 @[ts]
 ```typescript
-export const E = <T>(eff: (x: T) => void) => (x: T): T => { eff(x); return x; };
+export const E = <T>(f: (x: T) => void) => (x: T): T => { f(x); return x; };
 ```
 
 @[rs]
 ```rust
-pub fn E<T, F>(eff: F) -> impl Fn(T) -> T 
+pub fn E<T, F>(f: F, x: T) -> T 
 where F: Fn(&T)
 {
-    move |x| { eff(&x); x }
+    f(&x);
+    x
 }
 ```
 
 @[sh]
 ```bash
-# E (Effect/Side-Effect): Робить щось (виводить в stderr), не ламаючи потік
-# Usage: echo "data" | E "Processing..." | ...
+# E (Effect): Виконує команду, але пропускає оригінальний потік далі
 E() {
-    local MSG=$1
-    # Читаємо потік рядок за рядком
-    while IFS= read -r line; do
-        # Робимо ефект (наприклад, лог в stderr)
-        echo "⚡ $MSG: $line" >&2
-        # Пропускаємо дані далі (Identity)
-        echo "$line"
-    done
+    local cmd="$1"
+    tee >(eval "$cmd" > /dev/null)
 }
 ```
 

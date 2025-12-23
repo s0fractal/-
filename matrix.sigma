@@ -1,12 +1,28 @@
 Σ-MATRIX: THE BASIS VECTORS
+*PRINCIPLE: Universal Glyph Uniqueness. Every GLYPH is a unique functional atom across the Sigma field.*
 
-ID      | TYPE      | PATH   | HEX     | SYNTAX | MUTE   | LIFT
---------|-----------|--------|---------|--------|--------|---------------------
-sigma   | submodule | sigma/ | #CC00FF | yaml   | "# "   | ""
-ts      | submodule | ts/    | #3388FF | ts     | "// "  | ""
-rs      | submodule | rs/    | #FF4433 | rust   | "/// " | "#![no_std]"
-sh      | folder    | sh/    | #44FF88 | bash   | "# "   | "#!/bin/bash"
-rb      | folder    | rb/    | #FFD700 | ruby   | "# "   | "#!/usr/bin/ruby"
-md      | virtual   | md/    | #AAAAAA | md     | "<!-- "| ""
-json    | virtual   | json/  | #F7DF1E | json   | ""     | ""
-dna     | virtual   | dna/   | #00FF00 | glyphs | "// "  | ""
+ID      | TYPE      | PATH   | HEX     | SYNTAX | MUTE   | LIFT                 | MASS | ENTROPY | IMPORT
+--------|-----------|--------|---------|--------|--------|----------------------|------|---------|---------------------------------
+sigma   | submodule | sigma/ | #CC00FF | yaml   | "# "   |                      | 0.0  | 0.0     | # SOURCE: %p
+ts      | submodule | ts/    | #3388FF | ts     | "// "  |                      | 0.5  | 0.4     | import { %n } from "@/%p";
+rs      | submodule | rs/    | #FF4433 | rust   | "/// " | #![no_std]           | 0.9  | 0.1     | use crate::%p;
+sh      | folder    | sh/    | #44FF88 | bash   | "# "   | #!/bin/bash          | 0.1  | 0.9     | source "$REPO_ROOT/%p"
+rb      | folder    | rb/    | #FFD700 | ruby   | "# "   | #!/usr/bin/ruby      | 0.3  | 0.6     | require_relative "$REPO_ROOT/%p"
+md      | virtual   | md/    | #AAAAAA | md     | <!--   |                      | 0.2  | 0.7     | [%n](file://%p)
+json    | virtual   | json/  | #F7DF1E | json   |        |                      | 0.2  | 0.1     | "%n": "%p"
+dna     | virtual   | dna/   | #00FF00 | glyphs | "// "  |                      | 0.0  | 0.0     | // SOURCE: %p
+
+### ⚡ ENERGY LAYERS (The Crystal Lattice)
+- **E0**: The Ether (Fundamental Identity `I`).
+- **E1**: Axiomatic Atoms (`K, B, C, W, S, E, Z`).
+- **E2**: Derivative Molecules (`F, M, T`).
+- **E3**: Logic & Structures (`True, False, Pairs`).
+- **E7**: Infinite Processes (`Y`).
+- **E8**: High Protocols (`Tensor, Genesis, Lambda`).
+
+### ⚛️ PHYSICS (Entropy & Mass)
+- `mass`: Розмір або вага частинки (kb, loc).
+- `entropy`: Ступінь складності та ризику (Low/High).
+
+### 🔌 SOURCE (Supply Chain)
+`Layer = max(Layer_Dependencies) + 1`

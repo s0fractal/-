@@ -2,6 +2,10 @@
 GLYPH: Tensor
 ENERGY: 8
 SPECTRUM: [sh, dna]
+PHYSICS:
+  mass: 3kb
+  entropy: Low
+  complexity: O(1)
 ---
 
 # Tensor Engine
@@ -12,13 +16,8 @@ SPECTRUM: [sh, dna]
 
 @[sh]
 ```bash
-# s0fractal Tensor Engine v2.1 (Self-Hosted)
-# Load Context
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-export REPO_ROOT="$(dirname "$(dirname "$SCRIPT_DIR")")"
+# --- 0. State ---
 MATRIX_FILE="$REPO_ROOT/sigma/matrix.sigma"
-
-# --- TENSOR STATE ---
 export VECTOR_SPACE=()
 
 # --- LOAD MATRIX (Combinator Pipeline) ---
@@ -36,10 +35,20 @@ _load_matrix() {
         grep "|" | \
         grep -v "\-\-\-" | \
         grep -v "ID" | \
-        while IFS='|' read -r id type path hex syn mute lift; do
-            # Clean values using Identity combinator pattern if needed, 
-            # but here we just need raw strings.
-            echo "$(echo $id | xargs)|$(echo $type | xargs)|$(echo $path | xargs)|$(echo $hex | xargs)|$(echo $syn | xargs)|$(echo $mute | xargs | sed 's/^\"//; s/\"$//')|$(echo $lift | xargs | sed 's/^\"//; s/\"$//')"
+        while IFS='|' read -r id type path hex syn mute lift mass entropy imp; do
+            # Clean values (Symbolic Trim)
+            id_t=$(echo "$id" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')
+            type_t=$(echo "$type" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')
+            path_t=$(echo "$path" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')
+            hex_t=$(echo "$hex" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')
+            syn_t=$(echo "$syn" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')
+            mute_t=$(echo "$mute" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//; s/^\"//; s/\"$//')
+            lift_t=$(echo "$lift" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//; s/^\"//; s/\"$//')
+            mass_t=$(echo "$mass" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')
+            entropy_t=$(echo "$entropy" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')
+            imp_t=$(echo "$imp" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//; s/^\"//; s/\"$//')
+            
+            echo "$id_t|$type_t|$path_t|$hex_t|$syn_t|$mute_t|$lift_t|$mass_t|$entropy_t|$imp_t"
         done)
 }
 

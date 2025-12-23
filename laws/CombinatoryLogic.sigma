@@ -1,0 +1,55 @@
+---
+glyph: ⛓️
+name: Combinatory Logic Constraint
+energy: 1
+spectrum: [sigma, dna]
+desc: "Imperative code is forbidden. Only application of Basis Combinators is allowed."
+physics:
+  mass: 0.5kb
+  entropy: Zero
+  complexity: O(1)
+---
+
+# The Law of No-Fluff
+
+Цей закон встановлює фундаментальне обмеження: **код є даними, а виконання — редукцією**.
+
+## The Three Prohibitions
+
+1. **No Variables**: Аргументи передаються неявно (Point-free style).
+2. **No Loops**: Рекурсія досягається через комбінатори (Y, M).
+3. **No Classes**: Стан зберігається в замиканнях (Closures).
+
+## The Basis (Періодична Таблиця)
+
+Тільки ці атоми дозволені як примітиви:
+
+* **I**: Identity (`x -> x`)
+* **K**: Constant (`x -> y -> x`)
+* **S**: Substitution (`x -> y -> z -> x(z)(y(z))`)
+* **B**: Compose (`x -> y -> z -> x(y(z))`)
+* **C**: Flip (`x -> y -> z -> x(z)(y)`)
+* **W**: Duplication (`x -> y -> x(y)(y)`)
+
+## The Molecule (Code Structure)
+
+Код — це кортеж (Tuple) або масив гліфів.
+
+**Валідна програма:**
+```json
+["S", "K", "K"]
+```
+
+**Невалідна програма:**
+```javascript
+function(x) { return x }
+```
+
+## The Enforcement
+
+Парсер знає тільки про гліфи. Імперативні конструкції фізично неможливі.
+
+@[dna]
+```dna
+Σ1:⛓️
+```

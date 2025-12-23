@@ -1,0 +1,96 @@
+---
+glyph: ∞
+name: The Universal Function (λ)
+energy: 8
+spectrum: [ts, rs, sh, dna]
+source:
+  - origin: Tensor
+desc: "The Trinity of Computation: Identity (Being), Transformation (Becoming), Composition (Relating). The Ouroboros."
+tags: [god-function, dispatcher, recursive]
+physics:
+  mass: 1kb
+  entropy: Zero
+  complexity: O(N)
+---
+
+# The Universal Function
+
+Це єдина функція, яка потрібна. Всі інші — її окремі випадки.
+
+## Wave Function
+
+@[ts]
+```typescript
+/**
+ * λ - The Universal Polymorphic Engine
+ * @param x The data (The Being)
+ * @param f The transformation (The Becoming)
+ * @param xs Remaining transformations (The Relating)
+ */
+export const λ = (x: any, f?: any, ...xs: any[]): any => {
+    if (f === undefined) return x;
+    
+    // Map: λ([x], f)
+    if (Array.isArray(x) && typeof f === 'function' && xs.length === 0) {
+        return x.map(f);
+    }
+    
+    // Fold: λ([x], (a,b)=>a+b, init)
+    if (Array.isArray(x) && typeof f === 'function' && xs.length === 1) {
+        return x.reduce(f, xs[0]);
+    }
+    
+    // Pipe / Composition: λ(x, f, g)
+    if (xs.length > 0) {
+        return λ(f(x), ...xs);
+    }
+    
+    // Basic Application
+    return f(x);
+};
+
+export const fn = λ; 
+```
+
+@[rs]
+```rust
+// Polymorphic λ in Rust (simplified approach using traits or enums)
+pub fn lambda<T, F>(x: T, f: Option<F>) -> T 
+where F: Fn(T) -> T {
+    match f {
+        Some(func) => func(x),
+        None => x,
+    }
+}
+
+pub use lambda as function;
+```
+
+@[sh]
+```bash
+# λ Portal (Polymorphic Dispatcher)
+λ() {
+    local x="$1"
+    shift
+    if [ $# -eq 0 ]; then
+        echo "$x"
+        return
+    fi
+    
+    local f="$1"
+    shift
+    
+    # Recursive Pipe
+    if [ $# -gt 0 ]; then
+        local result=$(eval "$f" "$x")
+        λ "$result" "$@"
+    else
+        eval "$f" "$x"
+    fi
+}
+```
+
+@[dna]
+```dna
+Σ8:∞
+```

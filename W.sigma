@@ -1,11 +1,19 @@
 ---
 GLYPH: W
-ENERGY: 2
+ENERGY: 1
 SPECTRUM: [ts, rs, sh, dna]
+SOURCE:
+  - origin: null # Axiom: Pure Resource
+PHYSICS:
+  mass: 0.1kb
+  entropy: Medium
+  complexity: O(1)
 ---
-# Warbler (Duplicate)
 
-Duplicates the argument.
+# Witness (W) - Fork
+
+Чисте розмноження ресурсу. Дублює аргумент для функції.
+Аксіома форку.
 
 ## Wave Function
 
@@ -16,28 +24,24 @@ export const W = <A, B>(f: (x: A) => (y: A) => B) => (x: A): B => f(x)(x);
 
 @[rs]
 ```rust
-pub fn W<A, B, F>(f: F) -> impl Fn(A) -> B
-where F: Fn(A) -> Box<dyn Fn(A) -> B>, A: Clone
+pub fn W<A, B, F>(f: F, x: A) -> B 
+where 
+    F: Fn(A) -> Box<dyn Fn(A) -> B>,
+    A: Clone
 {
-    move |x| f(x.clone())(x)
+    f(x.clone())(x)
 }
 ```
 
 @[sh]
 ```bash
-# W (Fork/Witness): Дублює потік у файл або процес, повертає потік далі
-# Usage: echo "data" | W "log.txt" | ...
+# W (Witness): Дублює потік
 W() {
-    local TARGET=$1
-    if [ -z "$TARGET" ]; then
-        tee # Просто дублює в stdout (подвійний потік)
-    else
-        tee "$TARGET"
-    fi
+    tee >(cat)
 }
 ```
 
 @[dna]
 ```dna
-W2
+W1
 ```

@@ -2,6 +2,13 @@
 GLYPH: Doctor
 ENERGY: 8
 SPECTRUM: [sh, dna]
+SOURCE:
+  - origin: Tensor
+    type: internal
+PHYSICS:
+  mass: 3kb
+  entropy: Low
+  complexity: O(N)
 ---
 
 # Doctor Protocol
@@ -15,9 +22,8 @@ SPECTRUM: [sh, dna]
 # s0fractal Doctor v1.1 (Vital Signs)
 # Generated from Doctor.sigma
 
-source "$(dirname "${BASH_SOURCE[0]}")/tensor.sh"
-λ() { "$REPO_ROOT/sh/lambda.sh" "$@"; }
-
+# --- 0. Prepare ---
+# (Logic starts here)
 # --- Colors ---
 RED='\033[0;31m'
 GREEN='\033[0;32m'

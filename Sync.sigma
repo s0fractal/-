@@ -2,6 +2,13 @@
 GLYPH: Sync
 ENERGY: 8
 SPECTRUM: [sh, dna]
+SOURCE:
+  - origin: Tensor
+    type: internal
+PHYSICS:
+  mass: 1kb
+  entropy: Low
+  complexity: O(N)
 ---
 
 # Sync Protocol
@@ -15,9 +22,17 @@ SPECTRUM: [sh, dna]
 # s0fractal Sync v1.0 (Universe Synchronizer)
 # Generated from Sync.sigma
 
-source "$(dirname "${BASH_SOURCE[0]}")/tensor.sh"
-λ() { "$REPO_ROOT/sh/lambda.sh" "$@"; }
+# --- 0. State ---
+# Find REPO_ROOT by hunting for .git
+REPO_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+while [ ! -d "$REPO_ROOT/.git" ] && [ "$REPO_ROOT" != "/" ]; do
+    REPO_ROOT=$(dirname "$REPO_ROOT")
+done
+export REPO_ROOT
 
+source "$REPO_ROOT/sh/8/Tensor.sh"
+λ() { "$REPO_ROOT/sh/lambda.sh" "$@"; }
+# (Logic starts here)
 echo "🧬 Engaging Alignment..."
 
 # Iterate over all particles in the Sigma field

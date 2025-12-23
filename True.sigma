@@ -1,28 +1,37 @@
 ---
-GLYPH: T
-ENERGY: 1
-SPECTRUM: [ts, rs]
+GLYPH: True
+ENERGY: 3
+SPECTRUM: [ts, rs, sh, dna]
+SOURCE:
+  - origin: K # True is identity-projection via K
+PHYSICS:
+  mass: 0.1kb
+  entropy: Zero
+  complexity: O(1)
 ---
-# True
 
-Logical True (Kestrel). Selects the first option.
+# True - The Identity Boolean
+
+Логічне "Істина". У системі комбінаторів це аксіома вибору першого (K).
+Знаходиться на рівні 3 (Логіка).
 
 ## Wave Function
 
 @[ts]
 ```typescript
-import { K } from "./K.ts";
+import { K } from "./K";
 export const True = K;
 ```
 
-@[rs]
-```rust
-use crate::K;
-// In Church encoding, True is K
-pub fn True<A, B>(x: A, _y: B) -> A { x }
+@[sh]
+```bash
+# True: Alias for K
+True() {
+    K "$@"
+}
 ```
 
 @[dna]
 ```dna
-T1
+T3
 ```

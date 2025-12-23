@@ -1,0 +1,42 @@
+---
+GLYPH: M
+ENERGY: 2
+SPECTRUM: [ts, rs, sh, dna]
+SOURCE:
+  - origin: W
+  - origin: I
+PHYSICS:
+  mass: 0.1kb
+  entropy: Medium
+  complexity: O(1)
+---
+
+# Mockingbird (M) - The W(I) Formula
+
+Похідна молекула. Самовиклик (Self-application).
+M x = x x.
+
+## Wave Function
+
+@[ts]
+```typescript
+export const M = W(I);
+```
+
+@[rs]
+```rust
+pub const M: fn(any) -> any = W(I);
+```
+
+@[sh]
+```bash
+# M (Mockingbird): WI
+M() {
+    W "$I" "$@"
+}
+```
+
+@[dna]
+```dna
+M2
+```

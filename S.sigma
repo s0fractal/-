@@ -1,0 +1,53 @@
+---
+GLYPH: S
+ENERGY: 1
+SPECTRUM: [ts, rs, sh, dna]
+SOURCE:
+  - origin: null # Axiom: Pure Context
+PHYSICS:
+  mass: 0.2kb
+  entropy: High
+  complexity: O(N^2)
+---
+
+# Starling (S) - Fuse
+
+Чистий контекст. Передає один аргумент двом функціям і об'єднує результат.
+S xyz = xz(yz).
+Аксіома злиття.
+
+## Wave Function
+
+@[ts]
+```typescript
+export const S = <A, B, C>(f: (x: A) => (y: B) => C) => (g: (x: A) => B) => (x: A): C => f(x)(g(x));
+```
+
+@[rs]
+```rust
+pub fn S<A, B, C, F, G>(f: F, g: G) -> impl Fn(A) -> C
+where
+    F: Fn(A) -> Box<dyn Fn(B) -> C>,
+    G: Fn(A) -> B,
+    A: Clone,
+{
+    move |x| f(x.clone())(g(x))
+}
+```
+
+@[sh]
+```bash
+# S (Fuse): x z (y z)
+S() {
+    local f="$1"
+    local g="$2"
+    local z="$3"
+    local gz=$(eval "$g" "$z")
+    eval "$f" "$z" "$gz"
+}
+```
+
+@[dna]
+```dna
+S1
+```

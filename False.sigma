@@ -1,25 +1,37 @@
 ---
-GLYPH: F
-ENERGY: 1
-SPECTRUM: [ts, rs]
+GLYPH: False
+ENERGY: 3
+SPECTRUM: [ts, rs, sh, dna]
+SOURCE:
+  - origin: F # False is the derived molecule KI
+PHYSICS:
+  mass: 0.1kb
+  entropy: Zero
+  complexity: O(1)
 ---
-# False
 
-Logical False (Kite). Selects the second option. I matches Identity I but usually represented as `x => y => y` which is `KI`.
+# False - The Exclusion Boolean
+
+Логічне "Хибно". Використовує молекулу F (KI).
+Знаходиться на рівні 3 (Логіка).
 
 ## Wave Function
 
 @[ts]
 ```typescript
-export const False = <A, B>(x: A) => (y: B): B => y;
+import { F } from "./F";
+export const False = F;
 ```
 
-@[rs]
-```rust
-pub fn False<A, B>(_x: A, y: B) -> B { y }
+@[sh]
+```bash
+# False: Alias for F
+False() {
+    F "$@"
+}
 ```
 
 @[dna]
 ```dna
-F1
+F3
 ```

@@ -1,26 +1,28 @@
 ---
 GLYPH: Z
-ENERGY: 0
+ENERGY: 1
 SPECTRUM: [sh, dna]
+SOURCE:
+  - origin: null # Axiom: Pure Time
 ---
 
-# Z (Sleep/Wait)
+# Sleep (Z) - Wait
 
-Затримка потоку. Використовується для синхронізації еволюції або анти-спін-локів у демонах.
+Чиста затримка часу.
+Аксіома очікування.
 
 ## Wave Function
 
 @[sh]
 ```bash
-# Z (Sleep/Wait): Затримка потоку (для заспокоєння демонів)
-# Usage: echo "data" | Z 1 | ...
+# Z (Wait): Засинає на вказаний час
 Z() {
-    sleep $1
+    sleep "$1"
     cat -
 }
 ```
 
 @[dna]
 ```dna
-Z0
+Z1
 ```

@@ -2,6 +2,13 @@
 GLYPH: Synapse
 ENERGY: 8
 SPECTRUM: [sh, dna]
+SOURCE:
+  - origin: Tensor
+    type: internal
+PHYSICS:
+  mass: 2kb
+  entropy: Low
+  complexity: O(N)
 ---
 
 # Synapse Protocol
@@ -15,9 +22,7 @@ SPECTRUM: [sh, dna]
 # s0fractal Synapse v1.1 (Neural Context)
 # Generated from Synapse.sigma
 
-source "$(dirname "${BASH_SOURCE[0]}")/tensor.sh"
-λ() { "$REPO_ROOT/sh/lambda.sh" "$@"; }
-
+# --- 0. Prepare ---
 echo "--- SYSTEM CONTEXT START ---"
 echo "Root: $REPO_ROOT"
 echo "Citizen: $(whoami)"
@@ -27,7 +32,18 @@ echo "### TOPOLOGY (Matrix)"
 λ loop dims "ls -d . 2>/dev/null || echo '[Mirage]'"
 echo ""
 
-# 2. LEXICON (Protocol)
+# 2. THERMODYNAMICS (M/S Map)
+echo "### THERMODYNAMICS (M/S Map)"
+for dim in "${ALL_DIMS[@]}"; do
+    VEC=$(get_vector "$dim")
+    # id|type|path|hex|syn|mute|lift|mass|entropy
+    M=$(echo "$VEC" | cut -d'|' -f8)
+    S=$(echo "$VEC" | cut -d'|' -f9)
+    printf "  %-8s [M: %-3s | S: %-3s]\n" "$dim" "$M" "$S"
+done
+echo ""
+
+# 3. LEXICON (Protocol)
 LEXICON_DIR="$REPO_ROOT/sigma/chaos/lexicon"
 if [ -d "$LEXICON_DIR" ]; then
     echo "### LEXICON (Protocols)"

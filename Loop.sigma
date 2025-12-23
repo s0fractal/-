@@ -2,6 +2,13 @@
 GLYPH: Loop
 ENERGY: 8
 SPECTRUM: [sh, dna]
+SOURCE:
+  - origin: Tensor
+    type: internal
+PHYSICS:
+  mass: 2kb
+  entropy: Low
+  complexity: O(N)
 ---
 
 # Loop Protocol
@@ -15,9 +22,8 @@ SPECTRUM: [sh, dna]
 # s0fractal Loop v1.1 (Multidimensional Iterator)
 # Generated from Loop.sigma
 
-source "$(dirname "${BASH_SOURCE[0]}")/tensor.sh"
-λ() { "$REPO_ROOT/sh/lambda.sh" "$@"; }
-
+# --- 0. Prepare ---
+# (Logic starts here)
 TARGET_SET=$1
 CMD_TEMPLATE=$2
 

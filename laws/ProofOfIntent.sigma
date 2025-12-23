@@ -1,0 +1,201 @@
+---
+glyph: §
+name: Proof of Intent
+energy: 0
+spectrum: [sigma, dna]
+type: axiom
+desc: "The Bridge between Truth (Sigma) and Reality (Code). Ensures the Chain of Custody."
+physics:
+  mass: 0.8kb
+  entropy: Zero
+  complexity: O(1)
+---
+
+# THE PROTOCOL OF TRUTH
+
+Для людей ми не показуємо код. Ми показуємо **Статус Синхронізації**.
+
+## 1. The Proof Formula
+
+```
+Proof = Hash(Intent) ⊕ Hash(Code)
+```
+
+**Інтерпретація:**
+- Якщо `Proof == Valid` → кружечок **🟢 зелений**
+- Якщо `Proof == Invalid` → кружечок **🔴 червоний** (Реальність розійшлася з Інтентом)
+
+## 2. Visualization (The Circle)
+
+Людина бачить тільки це:
+
+### 🟢 Harmony (Гармонія)
+**Стан:** Інтент втілено ідеально.
+
+```
+Hash(sigma/I.sigma) == Hash(ts/0/I.ts)
+```
+
+**Значення:** Код точно відповідає Intent. Немає ручних змін.
+
+### 🟡 Flux (Потік)
+**Стан:** Іде процес зміни (генезис).
+
+```
+Genesis(Intent) → Code  (in progress)
+```
+
+**Значення:** Система матеріалізує Intent. Тимчасовий стан.
+
+### 🔴 Dissonance (Дисонанс)
+**Стан:** Ручне втручання в код (порушення Канону).
+
+```
+Hash(sigma/I.sigma) ≠ Hash(ts/0/I.ts)
+```
+
+**Значення:** Код змінено вручну без оновлення Intent. Порушення Chain of Custody.
+
+## 3. Chain of Custody
+
+```
+Intent (σ) → Genesis → Code (τ) → Verification → Proof (§)
+```
+
+**Правило:** Кожна зміна коду має походити з Intent.
+
+### Valid Chain
+```
+1. Edit sigma/I.sigma
+2. Run Genesis
+3. Generate ts/0/I.ts
+4. Proof = 🟢
+```
+
+### Broken Chain
+```
+1. Edit ts/0/I.ts directly  ❌
+2. sigma/I.sigma unchanged
+3. Proof = 🔴
+```
+
+## 4. Implementation
+
+### Hash Function
+```typescript
+function hashIntent(sigmaFile: string): string {
+  const content = readFile(sigmaFile);
+  const codeBlock = extractCodeBlock(content, frequency);
+  return sha256(codeBlock);
+}
+
+function hashCode(codeFile: string): string {
+  const content = readFile(codeFile);
+  return sha256(content);
+}
+```
+
+### Proof Verification
+```typescript
+function verifyProof(intent: string, code: string): ProofStatus {
+  const intentHash = hashIntent(intent);
+  const codeHash = hashCode(code);
+  
+  if (intentHash === codeHash) {
+    return ProofStatus.Harmony;  // 🟢
+  } else {
+    return ProofStatus.Dissonance;  // 🔴
+  }
+}
+```
+
+### Status Display
+```typescript
+type ProofStatus = '🟢' | '🟡' | '🔴';
+
+interface FileProof {
+  intent: string;      // sigma/I.sigma
+  code: string;        // ts/0/I.ts
+  status: ProofStatus;
+  intentHash: string;
+  codeHash: string;
+}
+```
+
+## 5. The Circle UI
+
+```
+┌─────────────────────────┐
+│   Sigma Field Status    │
+├─────────────────────────┤
+│ 🟢 I.sigma → ts/0/I.ts  │
+│ 🟢 K.sigma → ts/1/K.ts  │
+│ 🔴 F.sigma → ts/2/F.ts  │  ← Manual edit detected
+│ 🟡 M.sigma → ts/2/M.ts  │  ← Genesis in progress
+└─────────────────────────┘
+```
+
+## 6. Enforcement Rules
+
+### Rule 1: Single Source of Truth
+```
+Intent (σ) is the ONLY source of truth.
+Code (τ) is ALWAYS derived from Intent.
+```
+
+### Rule 2: No Direct Code Edits
+```
+❌ Edit ts/0/I.ts directly
+✅ Edit sigma/I.sigma → Run Genesis
+```
+
+### Rule 3: Automatic Verification
+```
+On every commit:
+  for each (intent, code) pair:
+    verify Proof
+    if Proof == 🔴:
+      block commit
+      show: "Dissonance detected in {file}"
+```
+
+## 7. Recovery from Dissonance
+
+Якщо виявлено 🔴:
+
+### Option A: Absorb (Reverse Genesis)
+```bash
+λ absorb ts/0/I.ts  # Extract Intent from Code
+# Creates/updates sigma/I.sigma
+```
+
+### Option B: Re-Genesis (Forward)
+```bash
+λ ⚡ sigma/I.sigma  # Overwrite Code from Intent
+# Regenerates ts/0/I.ts
+```
+
+### Option C: Manual Resolution
+```
+1. Review changes in ts/0/I.ts
+2. Decide: keep or discard
+3. Update sigma/I.sigma accordingly
+4. Run Genesis
+5. Verify Proof = 🟢
+```
+
+## 8. The Circle as Truth Oracle
+
+```
+§ = Truth Oracle
+🟢 = Trust (Code == Intent)
+🔴 = Distrust (Code ≠ Intent)
+🟡 = Transition (Genesis active)
+```
+
+**Філософія:** Людина не читає код. Людина читає кружечки. Кружечок — це Proof of Intent.
+
+@[dna]
+```dna
+Σ0:§
+```

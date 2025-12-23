@@ -1,0 +1,42 @@
+---
+GLYPH: F
+ENERGY: 2
+SPECTRUM: [ts, rs, sh, dna]
+SOURCE:
+  - origin: K
+  - origin: I
+PHYSICS:
+  mass: 0.2kb
+  entropy: Low
+  complexity: O(1)
+---
+
+# False (F) - The K(I) Formula
+
+Похідна молекула. Представляє логічне "Хибно" через формулу KI.
+У лабіринті вибору (K) вона вибирає те, що йде другим (I).
+
+## Wave Function
+
+@[ts]
+```typescript
+export const F = K(I);
+```
+
+@[rs]
+```rust
+pub const F: fn(any) -> any = K(I);
+```
+
+@[sh]
+```bash
+# F (False): KI
+F() {
+    K "$I" "$@"
+}
+```
+
+@[dna]
+```dna
+F2
+```

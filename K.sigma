@@ -2,10 +2,18 @@
 GLYPH: K
 ENERGY: 1
 SPECTRUM: [ts, rs, sh, dna]
+SOURCE:
+  - origin: null # Axiom: Pure Matter
+PHYSICS:
+  mass: 0.1kb
+  entropy: Low
+  complexity: O(1)
 ---
-# Kestrel (Constant)
 
-Returns a constant function. Discards the second argument.
+# Kestrel (K) - Constant
+
+Чиста матерія вибору. Повертає перший аргумент, ігнорує другий.
+Аксіома, що існує незалежно від руху (I).
 
 ## Wave Function
 
@@ -26,9 +34,7 @@ where A: Clone
 @[sh]
 ```bash
 # K (Constant): Ігнорує потік, видає аргумент
-# Usage: echo "noise" | K "truth" -> "truth"
 K() {
-    # Вичитуємо stdin в нікуди (щоб не ламати пайп), виводимо аргумент
     cat > /dev/null
     echo "$1"
 }

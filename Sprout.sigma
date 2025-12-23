@@ -2,6 +2,13 @@
 GLYPH: Sprout
 ENERGY: 8
 SPECTRUM: [sh, dna]
+SOURCE:
+  - origin: Tensor
+    type: internal
+PHYSICS:
+  mass: 5kb
+  entropy: Medium
+  complexity: O(N)
 ---
 
 # Sprout Protocol
@@ -15,11 +22,9 @@ SPECTRUM: [sh, dna]
 # s0fractal Sprout v1.0 (Node Spawner)
 # Generated from Sprout.sigma
 
+# --- 0. Prepare ---
 TARGET=$1
 if [ -z "$TARGET" ]; then echo "Usage: λ ⊕ <name>"; exit 1; fi
-
-source "$(dirname "${BASH_SOURCE[0]}")/tensor.sh"
-λ() { "$REPO_ROOT/sh/lambda.sh" "$@"; }
 
 # Logic A: Materialization (If target is a .sigma file)
 if [ -f "$TARGET" ]; then
